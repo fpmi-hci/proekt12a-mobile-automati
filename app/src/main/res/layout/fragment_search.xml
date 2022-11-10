@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.search.SearchFragment"
+    android:scrollbars="none"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:showDividers="middle"
+        android:divider="@drawable/divider_empty_h20"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="@dimen/bottom_navbar_offset">
+
+    <androidx.appcompat.widget.SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:queryHint="Search">
+    </androidx.appcompat.widget.SearchView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Искать"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/idFrSearchRVSearchTypes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_blue_100_rounded"
+        android:padding="10dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Жанры"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/idFrSearchRVGenres"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_blue_100_rounded"
+        android:padding="10dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Сортировать"/>
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/sorting_type"
+        android:padding="10dp"
+        android:spinnerMode="dropdown"
+        android:textAlignment="viewEnd"
+        style="@style/SpinnerSearchTheme"/>
+
+    <Button
+        android:id="@+id/idFrSearchBtnSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="Поиск"
+        app:cornerRadius="20dp" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

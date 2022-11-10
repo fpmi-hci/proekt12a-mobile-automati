@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:background="@color/white">
+
+
+        <ImageView
+            android:id="@+id/idItemBookMyBooksCover"
+            android:layout_width="120dp"
+            android:layout_height="140dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="20dp"
+            android:scaleType="centerInside"
+            android:src="@color/blue_500" />
+
+        <TextView
+            android:id="@+id/idItemBookMyBooksTitle"
+            android:layout_width="195dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:layout_toStartOf="@+id/idItemBookMyBooksBtnDownload"
+            android:layout_toEndOf="@id/idItemBookMyBooksCover"
+            android:text="Название книги"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/idItemBookMyBooksAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idItemBookMyBooksTitle"
+            android:layout_marginEnd="0dp"
+            android:layout_toStartOf="@+id/idItemBookMyBooksBtnDownload"
+            android:layout_toEndOf="@id/idItemBookMyBooksCover"
+            android:text="Автор"
+            android:textColor="@color/blue_200" />
+
+        <ImageView
+            android:id="@+id/idItemBookMyBooksBtnDownload"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignTop="@+id/idItemBookMyBooksCover"
+            android:layout_alignBottom="@+id/idItemBookMyBooksCover"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_download" />
+
+</RelativeLayout>

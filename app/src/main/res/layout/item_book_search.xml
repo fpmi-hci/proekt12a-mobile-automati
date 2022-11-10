@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@color/white">
+
+
+        <ImageView
+            android:id="@+id/idItemBookSearchCover"
+            android:layout_width="120dp"
+            android:layout_height="140dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerInside"
+            android:src="@color/blue_500" />
+        <TextView
+            android:id="@+id/idItemBookSearchTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idItemBookSearchCover"
+            android:text="Название книги"
+            android:textColor="@color/black" />
+        <TextView
+            android:id="@+id/idItemBookSearchAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Автор"
+            android:textColor="@color/gray_200"
+            android:layout_below="@id/idItemBookSearchTitle"/>
+        <TextView
+            android:id="@+id/idItemBookSearchPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Цена руб."
+            android:textColor="@color/orange_500"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/idItemBookSearchAuthor"/>
+
+</RelativeLayout>

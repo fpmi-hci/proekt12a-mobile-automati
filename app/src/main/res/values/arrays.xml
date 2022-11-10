@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sorting_type">
+        <item>A - Z</item>
+        <item>Z - A</item>
+    </string-array>
+
+    <string-array name="payment_type">
+        <item>Card</item>
+        <item>Check</item>
+    </string-array>
+</resources>

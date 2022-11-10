@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="ic_launcher_background">#0080F0</color>
+
+    <color name="blue_700">#0068C2</color>
+    <color name="blue_500">#0080F0</color>
+    <color name="blue_200">#73E5F0</color>
+    <color name="blue_100">#E0FBFF</color>
+    <color name="green_200">#03ED7D</color>
+    <color name="green_700">#069135</color>
+    <color name="red_200">#FF5C52</color>
+    <color name="orange_500">#FFAE52</color>
+    <color name="gray_200">#6F6F6F</color>
+
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>

@@ -12,14 +12,36 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.zlatamigas.readme.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_search"
+        android:name="com.zlatamigas.readme.ui.search.SearchFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_search" >
+    </fragment>
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.zlatamigas.readme.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_cart"
+        android:name="com.zlatamigas.readme.ui.cart.CartFragment"
+        android:label="@string/title_cart"
+        tools:layout="@layout/fragment_cart" />
+
+    <fragment
+        android:id="@+id/navigation_mybooks"
+        android:name="com.zlatamigas.readme.ui.mybooks.MyBooksFragment"
+        android:label="@string/title_mybooks"
+        tools:layout="@layout/fragment_mybooks" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.zlatamigas.readme.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/navigation_searchresult"
+        android:name="com.zlatamigas.readme.ui.searchresult.SearchResultFragment"
+        android:label=""
+        tools:layout="@layout/fragment_searchresult"
+        />
+
+
 </navigation>

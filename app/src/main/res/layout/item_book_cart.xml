@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:background="@color/white">
+
+
+        <CheckBox
+            android:id="@+id/idItemCartCheckbox"
+            style="@style/CheckBoxTheme"
+            android:layout_width="32dp"
+            android:layout_height="24dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
+
+        <ImageView
+            android:id="@+id/idItemBookCartCover"
+            android:layout_width="120dp"
+            android:layout_height="140dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
+            android:layout_toEndOf="@id/idItemCartCheckbox"
+            android:scaleType="centerInside"
+            android:src="@color/blue_500" />
+
+        <TextView
+            android:id="@+id/idItemBookCartTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/idItemBookCartCover"
+            android:text="Название книги"
+            android:textColor="@color/black" />
+        <TextView
+            android:id="@+id/idItemBookCartAuthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/idItemBookCartCover"
+            android:layout_below="@id/idItemBookCartTitle"
+            android:text="Автор"
+            android:textColor="@color/gray_200"/>
+
+        <TextView
+            android:id="@+id/idItemBookCartPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idItemBookCartAuthor"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/idItemBookCartCover"
+            android:text="Цена руб."
+            android:textColor="@color/orange_500" />
+
+        <ImageView
+            android:id="@+id/idItemBookCartBtnDelete"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignBottom="@id/idItemBookCartCover"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_delete" />
+
+</RelativeLayout>
