@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -18,6 +20,9 @@ public class ItemBookCartView extends RelativeLayout {
     private ImageView ivCover;
     private TextView tvTitle, tvAuthors, tvCost;
 
+    private CheckBox checkBox;
+    private ImageButton btnDelete;
+
     public ItemBookCartView(@NonNull Context context) {
         super(context);
 
@@ -25,9 +30,11 @@ public class ItemBookCartView extends RelativeLayout {
 
         tvTitle = view.findViewById(R.id.idItemBookCartTitle);
         tvAuthors = view.findViewById(R.id.idItemBookCartAuthor);
-        tvCost = view.findViewById(R.id.idItemBookCartPrice);
+        tvCost = view.findViewById(R.id.idItemBookCartFLPrice);
         ivCover = view.findViewById(R.id.idItemBookCartCover);
 
+        btnDelete = view.findViewById(R.id.idItemBookCartBtnDelete);
+        checkBox = view.findViewById(R.id.idItemBookCartCheckbox);
     }
 
     public ItemBookCartView(@NonNull Context context, @Nullable AttributeSet attrs) {
@@ -50,10 +57,13 @@ public class ItemBookCartView extends RelativeLayout {
             tvTitle.setText(title);
             tvAuthors = view.findViewById(R.id.idItemBookCartAuthor);
             tvAuthors.setText(author);
-            tvCost = view.findViewById(R.id.idItemBookCartPrice);
+            tvCost = view.findViewById(R.id.idItemBookCartFLPrice);
             tvCost.setText(price);
             ivCover = view.findViewById(R.id.idItemBookCartCover);
             ivCover.setImageResource(cover);
+
+            btnDelete = view.findViewById(R.id.idItemBookCartBtnDelete);
+            checkBox = view.findViewById(R.id.idItemBookCartCheckbox);
         } finally {
             a.recycle();
         }
@@ -73,5 +83,13 @@ public class ItemBookCartView extends RelativeLayout {
 
     public TextView getTvCost() {
         return tvCost;
+    }
+
+    public ImageButton getBtnDelete() {
+        return btnDelete;
+    }
+
+    public CheckBox getCheckBox() {
+        return checkBox;
     }
 }

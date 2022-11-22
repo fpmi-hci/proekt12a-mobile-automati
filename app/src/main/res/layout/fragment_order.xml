@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.cart.CartFragment"
+    tools:context=".ui.order.OrderFragment"
     android:scrollbars="none"
     android:background="@color/white">
 
@@ -15,21 +15,14 @@
         android:orientation="vertical"
         android:paddingBottom="@dimen/bottom_navbar_offset"
         android:divider="@drawable/divider_empty_h20"
-        android:showDividers="middle">
+        android:showDividers="middle"
+        android:background="@color/gray_100">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/idFrCartRVBooks"
+            android:id="@+id/idFrOrderRVBooks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </androidx.recyclerview.widget.RecyclerView>
-
-        <CheckBox
-            android:id="@+id/idFrCartCBSelectAll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/CheckBoxTheme"
-            android:text="Выбрать все"
-            android:textColor="@color/gray_200"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,7 +47,6 @@
                     android:text="Выбрано книг: "
                     android:textColor="@color/black"/>
                 <TextView
-                    android:id="@+id/idFrCartTVSelectedCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1"
@@ -72,7 +64,6 @@
                 style="@style/SpinnerPaymentTypeTheme"/>
 
             <TextView
-                android:id="@+id/idFrCartTVSelectedCost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
@@ -84,7 +75,6 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/idFrCartBtnToOrder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/green_200"

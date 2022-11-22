@@ -15,8 +15,7 @@
         android:id="@+id/navigation_search"
         android:name="com.zlatamigas.readme.ui.search.SearchFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/fragment_search" >
-    </fragment>
+        tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/navigation_cart"
@@ -42,6 +41,15 @@
         android:label=""
         tools:layout="@layout/fragment_searchresult"
         />
+
+    <fragment
+        android:id="@+id/navigation_order"
+        android:name="com.zlatamigas.readme.ui.order.OrderFragment"
+        android:label="@string/title_order"
+        tools:layout="@layout/fragment_order"
+        />
+
+
 
 
 </navigation>

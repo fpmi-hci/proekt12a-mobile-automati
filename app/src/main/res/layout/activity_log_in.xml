@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/log_page_margin"
+    tools:context=".LogInActivity">
+
+
+    <TextView
+        android:id="@+id/idActLogInLRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Вход"
+        android:textColor="@color/blue_500"
+        android:textSize="@dimen/label_title_text_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/idActLogInETEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_white_border_blue_500_rounded"
+        android:hint="Адрес электронной почты"
+        android:singleLine="true"
+        android:paddingHorizontal="@dimen/input_field_padding_horizontal"
+        android:paddingVertical="@dimen/input_field_padding_vertical"
+        android:textSize="@dimen/input_field_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idActLogInLRegister" />
+
+    <EditText
+        android:id="@+id/idActLogInETPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:background="@drawable/bg_white_border_blue_500_rounded"
+        android:hint="Пароль"
+        android:singleLine="true"
+        android:paddingHorizontal="@dimen/input_field_padding_horizontal"
+        android:paddingVertical="@dimen/input_field_padding_vertical"
+        android:textSize="@dimen/input_field_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idActLogInETEmail" />
+
+    <Button
+        android:id="@+id/idActLogInBtnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:layout_marginBottom="20dp"
+        android:paddingVertical="@dimen/button_padding_vertical"
+        android:text="Войти"
+        android:textAllCaps="false"
+        android:textSize="@dimen/button_text_size"
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idActLogInETPassword" />
+
+    <LinearLayout
+        android:id="@+id/idActLogInLLDivider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idActLogInBtnLogin">
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="1"
+            android:background="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="или"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:background="@color/black" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/idActLogInBtnToRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:backgroundTint="@color/blue_200"
+        android:paddingVertical="@dimen/button_padding_vertical"
+        android:text="Зарегистрироваться"
+        android:textAllCaps="false"
+        android:textSize="@dimen/button_text_size"
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idActLogInLLDivider" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

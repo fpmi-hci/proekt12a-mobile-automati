@@ -23,106 +23,97 @@
             android:textAlignment="center"
             android:text="Книги"
             android:textColor="@color/blue_500"
-            android:textSize="12pt"/>
+            android:textSize="@dimen/label_title_text_size"
+            android:textStyle="bold"/>
 
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:scrollbars="none">
-
-            <LinearLayout
+            <HorizontalScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:dividerPadding="20dp"
-                android:divider="@drawable/divider_empty_w20"
-                android:showDividers="middle">
+                android:scrollbars="none"
+                android:layout_gravity="center_horizontal">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:showDividers="middle">
+                    android:orientation="horizontal"
+                    android:divider="@drawable/divider_empty_w20"
+                    android:showDividers="middle"
+                    android:padding="20dp"
+                    android:gravity="center_horizontal">
 
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="120dp"
-                        android:src="@color/blue_700"/>
-                    <TextView
-                        android:layout_width="100dp"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Жанр"
-                        android:textColor="@color/black"
-                        android:textAlignment="center"/>
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/genre_width"
+                            android:layout_height="@dimen/genre_height"
+                            android:src="@color/blue_700"
+                            android:layout_marginBottom="@dimen/genre_divider_img_name"/>
+                        <TextView
+                            android:layout_width="@dimen/genre_width"
+                            android:layout_height="wrap_content"
+                            android:text="Худодественная литература"
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:textSize="@dimen/genre_text_size"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/genre_width"
+                            android:layout_height="@dimen/genre_height"
+                            android:src="@color/blue_700"
+                            android:layout_marginBottom="@dimen/genre_divider_img_name"/>
+                        <TextView
+                            android:layout_width="@dimen/genre_width"
+                            android:layout_height="wrap_content"
+                            android:text="Нехудожественная литература"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/genre_text_size"
+                            android:textAlignment="center"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/genre_width"
+                            android:layout_height="@dimen/genre_height"
+                            android:src="@color/blue_700"
+                            android:layout_marginBottom="@dimen/genre_divider_img_name"/>
+                        <TextView
+                            android:layout_width="@dimen/genre_width"
+                            android:layout_height="wrap_content"
+                            android:text="Фентези и фантастика"
+                            android:textColor="@color/black"
+                            android:textAlignment="center"
+                            android:textSize="@dimen/genre_text_size"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+            </HorizontalScrollView>
 
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="120dp"
-                        android:src="@color/blue_700"/>
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Жанр"
-                        android:textColor="@color/black"
-                        android:textAlignment="center"/>
 
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="120dp"
-                        android:src="@color/blue_700"/>
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Жанр"
-                        android:textColor="@color/black"
-                        android:textAlignment="center"/>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="100dp"
-                        android:layout_height="120dp"
-                        android:src="@color/blue_700"/>
-                    <TextView
-                        android:layout_width="100dp"
-                        android:layout_height="wrap_content"
-                        android:text="Жанр"
-                        android:textColor="@color/black"
-                        android:textAlignment="center"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </HorizontalScrollView>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="32dp"
             android:backgroundTint="@color/blue_500"
             android:text="Главные новинки"
+            android:textSize="@dimen/button_text_size"
+            android:paddingVertical="@dimen/button_padding_vertical"
             android:textAllCaps="false"
-            app:cornerRadius="32dp"
-            android:paddingVertical="12dp"/>
-
+            app:cornerRadius="@dimen/button_corner_radius"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/idFrHomeRVRandomBooks"
@@ -135,12 +126,13 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="32dp"
             android:backgroundTint="@color/blue_200"
             android:text="Посмотреть другие товары"
+            android:textSize="@dimen/button_text_size"
+            android:paddingVertical="@dimen/button_padding_vertical"
             android:textAllCaps="false"
-            app:cornerRadius="32dp"
-            android:paddingVertical="12dp"/>
+            app:cornerRadius="@dimen/button_corner_radius"/>
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

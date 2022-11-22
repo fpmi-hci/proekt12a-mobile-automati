@@ -8,31 +8,27 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class APIController {
+
+    private ArrayList<BookCommonInfoRVModel> models;
+
     public APIController() {
+        models = new ArrayList<>();
+
+        models.add(new BookCommonInfoRVModel(1, "First book", Arrays.asList("Addam K."), new BigDecimal("12")));
+        models.add(new BookCommonInfoRVModel(2, "Second book", Arrays.asList("Adew K."), new BigDecimal("2.3")));
+        models.add(new BookCommonInfoRVModel(3, "Third book", Arrays.asList("Oddie M."), new BigDecimal("132")));
+        models.add(new BookCommonInfoRVModel(4, "44444444444444 book", Arrays.asList("Tom S."), new BigDecimal("92")));
+        models.add(new BookCommonInfoRVModel(5, "Last book book", Arrays.asList("Arma Lace"), new BigDecimal("34.7")));
     }
 
     public ArrayList<BookCommonInfoRVModel> getRandomBooksCommonInfo(){
-        ArrayList<BookCommonInfoRVModel> models = new ArrayList<>();
 
-        models.add(new BookCommonInfoRVModel(1, "First book", Arrays.asList("Addam K."), new BigDecimal("12")));
-        models.add(new BookCommonInfoRVModel(2, "Second book", Arrays.asList("Adew K."), new BigDecimal("2.3")));
-        models.add(new BookCommonInfoRVModel(3, "Third book", Arrays.asList("Oddie M."), new BigDecimal("132")));
-        models.add(new BookCommonInfoRVModel(4, "44444444444444 book", Arrays.asList("Tom S."), new BigDecimal("92")));
-        models.add(new BookCommonInfoRVModel(5, "Last book book", Arrays.asList("Arma Lace"), new BigDecimal("34.7")));
-
-        return models;
+        return new ArrayList<>(models);
     }
 
     public ArrayList<BookCommonInfoRVModel> getSearchBooksCommonInfo(){
-        ArrayList<BookCommonInfoRVModel> models = new ArrayList<>();
 
-        models.add(new BookCommonInfoRVModel(1, "First book", Arrays.asList("Addam K."), new BigDecimal("12")));
-        models.add(new BookCommonInfoRVModel(2, "Second book", Arrays.asList("Adew K."), new BigDecimal("2.3")));
-        models.add(new BookCommonInfoRVModel(3, "Third book", Arrays.asList("Oddie M."), new BigDecimal("132")));
-        models.add(new BookCommonInfoRVModel(4, "44444444444444 book", Arrays.asList("Tom S."), new BigDecimal("92")));
-        models.add(new BookCommonInfoRVModel(5, "Last book book", Arrays.asList("Arma Lace"), new BigDecimal("34.7")));
-
-        return models;
+        return new ArrayList<>(models);
     }
 
     public ArrayList<SearchCheckboxRVModel> getGenres(){
@@ -66,27 +62,22 @@ public class APIController {
         return models;
     }
 
-    public ArrayList<BookCommonInfoRVModel> getUserCartBooks(int userId){
-        ArrayList<BookCommonInfoRVModel> models = new ArrayList<>();
+    public ArrayList<BookCommonInfoRVModel> getUserCartBooks(long userId){
 
-        models.add(new BookCommonInfoRVModel(1, "First book", Arrays.asList("Addam K."), new BigDecimal("12")));
-        models.add(new BookCommonInfoRVModel(2, "Second book", Arrays.asList("Adew K."), new BigDecimal("2.3")));
-        models.add(new BookCommonInfoRVModel(3, "Third book", Arrays.asList("Oddie M."), new BigDecimal("132")));
-        models.add(new BookCommonInfoRVModel(4, "44444444444444 book", Arrays.asList("Tom S."), new BigDecimal("92")));
-        models.add(new BookCommonInfoRVModel(5, "Last book book", Arrays.asList("Arma Lace"), new BigDecimal("34.7")));
-
-        return models;
+        return new ArrayList<>(models);
     }
 
-    public ArrayList<BookCommonInfoRVModel> getUserBoughtBooks(int userId){
-        ArrayList<BookCommonInfoRVModel> models = new ArrayList<>();
+    public ArrayList<BookCommonInfoRVModel> getUserOrderBooks(long userId){
 
-        models.add(new BookCommonInfoRVModel(1, "First book", Arrays.asList("Addam K."), new BigDecimal("12")));
-        models.add(new BookCommonInfoRVModel(2, "Second book", Arrays.asList("Adew K."), new BigDecimal("2.3")));
-        models.add(new BookCommonInfoRVModel(3, "Third book", Arrays.asList("Oddie M."), new BigDecimal("132")));
-        models.add(new BookCommonInfoRVModel(4, "44444444444444 book", Arrays.asList("Tom S."), new BigDecimal("92")));
-        models.add(new BookCommonInfoRVModel(5, "Last book book", Arrays.asList("Arma Lace"), new BigDecimal("34.7")));
+        return new ArrayList<>(models);
+    }
 
-        return models;
+    public ArrayList<BookCommonInfoRVModel> getUserBoughtBooks(long userId){
+
+        return new ArrayList<>(models);
+    }
+
+    public boolean removeBookFromCart(long bookId, long userId){
+        return true;
     }
 }

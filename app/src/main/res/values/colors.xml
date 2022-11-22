@@ -2,7 +2,9 @@
 <resources>
 
     <color name="ic_launcher_background">#0080F0</color>
+    <color name="transparent">#00000000</color>
 
+    <color name="blue_900">#0137A6</color>
     <color name="blue_700">#0068C2</color>
     <color name="blue_500">#0080F0</color>
     <color name="blue_200">#73E5F0</color>
@@ -13,6 +15,7 @@
     <color name="orange_500">#FFAE52</color>
     <color name="gray_200">#6F6F6F</color>
 
+    <color name="gray_100">#EFEFEF</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>

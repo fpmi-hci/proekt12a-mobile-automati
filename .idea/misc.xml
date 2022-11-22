@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/drawable-v24/bg_white_border_blue_200_rounded.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/drawable-v24/divider_empty.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/drawable-v24/divider_empty_h20.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/drawable-v24/divider_empty_w20.xml" value="0.19583333333333333" />
@@ -23,18 +24,22 @@
         <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/drawable/ic_download.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.1" />
         <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/drawable/ic_search.xml" value="0.1" />
+        <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/activity_log_in.xml" value="0.13333333333333333" />
         <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/activity_register.xml" value="0.15942028985507245" />
         <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/divider_empty.xml" value="0.1796875" />
-        <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/fragment_book.xml" value="0.1" />
+        <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/fragment_book.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/fragment_cart.xml" value="0.22" />
         <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/fragment_dashboard.xml" value="0.1796875" />
-        <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/fragment_mybooks.xml" value="0.22469410456062291" />
+        <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/fragment_order.xml" value="0.1796875" />
         <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/fragment_profile.xml" value="0.1796875" />
-        <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/fragment_search.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/fragment_search.xml" value="0.1" />
         <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/fragment_searchresult.xml" value="0.1796875" />
-        <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/item_book_cart.xml" value="0.22" />
+        <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/item_book_cart.xml" value="0.5" />
         <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/item_book_mybooks.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/item_book_order.xml" value="0.22" />
         <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/item_book_search.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/item_cart.xml" value="0.22" />
         <entry key="..\:/Users/zlata/Documents/GitHub/proekt12a-mobile-automati/app/src/main/res/layout/item_search.xml" value="0.16666666666666666" />

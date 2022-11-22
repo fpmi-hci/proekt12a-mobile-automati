@@ -9,8 +9,10 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,11 +62,14 @@ public class SearchFragment extends Fragment {
 
         Button btnSearch = binding.idFrSearchBtnSearch;
         btnSearch.setOnClickListener(v -> {
-            SearchResultFragment nextFrag= new SearchResultFragment();
-            requireActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.nav_host_fragment_activity_main, nextFrag, "Search result")
-                    .addToBackStack(null)
-                    .commit();
+//            SearchResultFragment nextFrag= new SearchResultFragment();
+//            requireActivity().getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.nav_host_fragment_activity_main, nextFrag, "Search result")
+//                    .addToBackStack(null)
+//                    .commit();
+
+            NavController navController = NavHostFragment.findNavController(this);
+            navController.navigate(R.id.navigation_searchresult);
         });
 
         return root;

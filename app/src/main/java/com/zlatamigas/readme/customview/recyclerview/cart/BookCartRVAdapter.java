@@ -1,6 +1,7 @@
 package com.zlatamigas.readme.customview.recyclerview.cart;
 
 import android.content.Context;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,7 @@ import com.zlatamigas.readme.customview.ItemBookCartView;
 import com.zlatamigas.readme.customview.ItemBookSearchView;
 import com.zlatamigas.readme.customview.recyclerview.entity.BookCommonInfoRVModel;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -20,6 +22,9 @@ public class BookCartRVAdapter extends RecyclerView.Adapter<BookCartRVAdapter.Bo
 
     private BookCartRVOptionsListener listener;
 
+    // For checkbox control
+    private ArrayList<ItemBookCartView> viewList;
+
     public BookCartRVAdapter(
             Context context,
             ArrayList<BookCommonInfoRVModel> booksList,
@@ -28,6 +33,7 @@ public class BookCartRVAdapter extends RecyclerView.Adapter<BookCartRVAdapter.Bo
         this.context = context;
         this.booksList = booksList;
         this.listener = listener;
+        viewList = new ArrayList<>();
     }
 
     @NonNull
@@ -46,7 +52,14 @@ public class BookCartRVAdapter extends RecyclerView.Adapter<BookCartRVAdapter.Bo
 
         ItemBookCartView view = holder.itemView;
 
+        viewList.add(position, view);
+
         // cover
+
+        view.getBtnDelete().setOnClickListener(v -> {
+            listener.onDeleteBookClicked(model, position);
+        });
+        view.getCheckBox().setOnClickListener(v -> listener.onSelectCheckBoxClicked(model, view));
 
         view.getTvTitle().setText(model.getTitle());
 
@@ -79,5 +92,24 @@ public class BookCartRVAdapter extends RecyclerView.Adapter<BookCartRVAdapter.Bo
             super(itemView);
             this.itemView = itemView;
         }
+    }
+
+
+    public void selectAll(){
+        for(ItemBookCartView v : viewList){
+            v.getCheckBox().setChecked(true);
+        }
+    }
+
+    public void unselectAll(){
+        for(ItemBookCartView v : viewList){
+            v.getCheckBox().setChecked(false);
+        }
+    }
+
+    public void deleteViewWithModelAt(int position){
+        booksList.remove(position);
+        viewList.remove(position);
+        notifyDataSetChanged();
     }
 }

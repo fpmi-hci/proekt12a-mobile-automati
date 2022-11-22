@@ -3,6 +3,8 @@
     <string name="title_home">ReadMe</string>
     <string name="title_search">Search</string>
     <string name="title_cart">Cart</string>
+    <string name="title_order">Order</string>
     <string name="title_mybooks">My books</string>
     <string name="title_profile">Profile</string>
+    <string name="title_activity_register">RegisterActivity</string>
 </resources>
