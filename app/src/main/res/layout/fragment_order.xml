@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.order.OrderFragment"
     android:scrollbars="none"
-    android:background="@color/white">
+    android:background="@color/gray_100">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,14 +15,15 @@
         android:orientation="vertical"
         android:paddingBottom="@dimen/bottom_navbar_offset"
         android:divider="@drawable/divider_empty_h20"
-        android:showDividers="middle"
-        android:background="@color/gray_100">
+        android:showDividers="middle">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/idFrOrderRVBooks"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/white">
         </androidx.recyclerview.widget.RecyclerView>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,6 +48,7 @@
                     android:text="Выбрано книг: "
                     android:textColor="@color/black"/>
                 <TextView
+                    android:id="@+id/idFrOrderTVSelectedCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1"
@@ -64,6 +66,7 @@
                 style="@style/SpinnerPaymentTypeTheme"/>
 
             <TextView
+                android:id="@+id/idFrOrderTVSelectedCost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"

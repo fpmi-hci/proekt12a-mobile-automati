@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.zlatamigas.readme.R;
 import com.zlatamigas.readme.controller.APIController;
+import com.zlatamigas.readme.controller.OrderController;
 import com.zlatamigas.readme.customview.ItemBookCartView;
 import com.zlatamigas.readme.customview.recyclerview.cart.BookCartRVAdapter;
 import com.zlatamigas.readme.customview.recyclerview.cart.BookCartRVOptionsListener;
@@ -34,14 +35,13 @@ public class CartFragment extends Fragment implements BookCartRVOptionsListener 
     private APIController apiController;
 
     private RecyclerView rvCartBooks;
-    private ArrayList<BookCommonInfoRVModel> rvModelBookCommonInfoRVModelList;
     private BookCartRVAdapter rvAdapter;
 
     private CartViewModel cartViewModel;
     private FragmentCartBinding binding;
 
     private CheckBox cbSelectAll;
-    private ArrayList<BookCommonInfoRVModel> selectedBooks;
+    private OrderController orderController;
 
     private TextView tvSelectedCount;
     private TextView tvSelectedCost;
@@ -53,11 +53,12 @@ public class CartFragment extends Fragment implements BookCartRVOptionsListener 
         binding = FragmentCartBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+        orderController = OrderController.getInstance();
         apiController = new APIController();
 
         rvCartBooks = binding.idFrCartRVBooks;
 
-        rvModelBookCommonInfoRVModelList = new ArrayList<>();
+        ArrayList<BookCommonInfoRVModel> rvModelBookCommonInfoRVModelList = apiController.getUserCartBooks(1);
         rvAdapter = new BookCartRVAdapter(requireActivity(), rvModelBookCommonInfoRVModelList, this);
         rvCartBooks.setAdapter(rvAdapter);
 
@@ -70,7 +71,7 @@ public class CartFragment extends Fragment implements BookCartRVOptionsListener 
         itemDecorator.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.divider_blue_100_2h));
         rvCartBooks.addItemDecoration(itemDecorator);
 
-        fillCart();
+
 
         Button btnSearch = binding.idFrCartBtnToOrder;
         btnSearch.setOnClickListener(v -> {
@@ -79,17 +80,16 @@ public class CartFragment extends Fragment implements BookCartRVOptionsListener 
             navController.navigate(R.id.navigation_order);
         });
 
-        selectedBooks = new ArrayList<>();
 
         cbSelectAll = binding.idFrCartCBSelectAll;
         cbSelectAll.setOnClickListener(v -> {
             if(cbSelectAll.isChecked()) {
                 rvAdapter.selectAll();
-                selectedBooks.clear();
-                selectedBooks.addAll(rvModelBookCommonInfoRVModelList);
+                orderController.clear();
+                orderController.replaceAll(rvModelBookCommonInfoRVModelList);
             } else {
                 rvAdapter.unselectAll();
-                selectedBooks.clear();
+                orderController.clear();
             }
             setSelectedBooksSumInfo();
         });
@@ -100,13 +100,6 @@ public class CartFragment extends Fragment implements BookCartRVOptionsListener 
         setSelectedBooksSumInfo();
 
         return root;
-    }
-
-    public void fillCart(){
-
-        rvModelBookCommonInfoRVModelList.clear();
-        rvModelBookCommonInfoRVModelList.addAll(apiController.getUserCartBooks(1));
-        rvAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -124,9 +117,9 @@ public class CartFragment extends Fragment implements BookCartRVOptionsListener 
     @Override
     public void onSelectCheckBoxClicked(BookCommonInfoRVModel book, ItemBookCartView v) {
         if(v.getCheckBox().isChecked()){
-            selectedBooks.add(book);
+            orderController.add(book);
         } else {
-            selectedBooks.remove(book);
+            orderController.remove(book);
             cbSelectAll.setChecked(false);
         }
         setSelectedBooksSumInfo();
@@ -135,17 +128,24 @@ public class CartFragment extends Fragment implements BookCartRVOptionsListener 
     @Override
     public void onDeleteBookClicked(BookCommonInfoRVModel book, int position) {
         rvAdapter.deleteViewWithModelAt(position);
-        selectedBooks.remove(book);
+        orderController.remove(book);
         apiController.removeBookFromCart(book.getId(), 1);
         setSelectedBooksSumInfo();
     }
 
     private void setSelectedBooksSumInfo(){
-        tvSelectedCount.setText(Integer.toString(selectedBooks.size()));
+        tvSelectedCount.setText(Integer.toString(orderController.getSelectedBooks().size()));
         BigDecimal cost = new BigDecimal(0);
-        for(BookCommonInfoRVModel book : selectedBooks){
+        for(BookCommonInfoRVModel book : orderController.getSelectedBooks()){
             cost = cost.add(book.getCost());
         }
         tvSelectedCost.setText(cost.toString() + " rub.");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        orderController.clear();
+        setSelectedBooksSumInfo();
     }
 }

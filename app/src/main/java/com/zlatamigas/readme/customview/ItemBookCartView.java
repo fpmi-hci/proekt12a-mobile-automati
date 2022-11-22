@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewDebug;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -91,5 +92,14 @@ public class ItemBookCartView extends RelativeLayout {
 
     public CheckBox getCheckBox() {
         return checkBox;
+    }
+
+    @ViewDebug.ExportedProperty
+    public boolean isChecked() {
+        return checkBox.isChecked();
+    }
+
+    public void setChecked(boolean checked) {
+        checkBox.setChecked(checked);
     }
 }

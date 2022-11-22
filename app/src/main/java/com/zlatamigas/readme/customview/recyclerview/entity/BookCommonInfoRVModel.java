@@ -1,6 +1,7 @@
 package com.zlatamigas.readme.customview.recyclerview.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,6 +11,13 @@ public class BookCommonInfoRVModel {
     private String title;
     private List<String> authors;
     private BigDecimal cost;
+
+    public BookCommonInfoRVModel(){
+        id = -1;
+        title = "";
+        authors = new ArrayList<>();
+        cost = new BigDecimal(0);
+    }
 
     public BookCommonInfoRVModel(long id, String title, List<String> authors, BigDecimal cost) {
         this.id = id;
@@ -33,5 +41,6 @@ public class BookCommonInfoRVModel {
     public BigDecimal getCost() {
         return cost;
     }
+
 
 }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -15,10 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.zlatamigas.readme.R;
 import com.zlatamigas.readme.controller.APIController;
+import com.zlatamigas.readme.controller.OrderController;
 import com.zlatamigas.readme.customview.recyclerview.order.BookOrderRVAdapter;
 import com.zlatamigas.readme.customview.recyclerview.entity.BookCommonInfoRVModel;
 import com.zlatamigas.readme.databinding.FragmentOrderBinding;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class OrderFragment extends Fragment {
@@ -43,7 +46,8 @@ public class OrderFragment extends Fragment {
 
         rvOrderBooks = binding.idFrOrderRVBooks;
 
-        rvModelBookCommonInfoRVModelList = new ArrayList<>();
+
+        rvModelBookCommonInfoRVModelList = OrderController.getInstance().getSelectedBooks();
         rvAdapter = new BookOrderRVAdapter(requireActivity(), rvModelBookCommonInfoRVModelList);
         rvOrderBooks.setAdapter(rvAdapter);
 
@@ -51,21 +55,23 @@ public class OrderFragment extends Fragment {
         rvOrderBooks.setLayoutManager(layoutManager);
         rvOrderBooks.setNestedScrollingEnabled(false);
 
+
+        TextView tvSelectedCount = binding.idFrOrderTVSelectedCount;
+        TextView tvSelectedCost = binding.idFrOrderTVSelectedCost;
+        tvSelectedCount.setText(Integer.toString(rvModelBookCommonInfoRVModelList.size()));
+        BigDecimal cost = new BigDecimal(0);
+        for(BookCommonInfoRVModel book : rvModelBookCommonInfoRVModelList){
+            cost = cost.add(book.getCost());
+        }
+        tvSelectedCost.setText(cost.toString() + " rub.");
+
+
 //        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 //        DividerItemDecoration itemDecorator = new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL);
 //        itemDecorator.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.divider_blue_100_2h));
 //        rvOrderBooks.addItemDecoration(itemDecorator);
 
-        fillOrder();
-
         return root;
-    }
-
-    public void fillOrder(){
-
-        rvModelBookCommonInfoRVModelList.clear();
-        rvModelBookCommonInfoRVModelList.addAll(apiController.getUserOrderBooks(1));
-        rvAdapter.notifyDataSetChanged();
     }
 
     @Override
