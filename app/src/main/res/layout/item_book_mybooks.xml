@@ -8,8 +8,8 @@
 
         <ImageView
             android:id="@+id/idItemBookMyBooksCover"
-            android:layout_width="120dp"
-            android:layout_height="140dp"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginEnd="20dp"

@@ -5,20 +5,21 @@
     android:padding="20dp"
     android:background="@color/white">
 
-
         <ImageView
             android:id="@+id/idItemBookSearchCover"
             android:layout_width="120dp"
-            android:layout_height="140dp"
+            android:layout_height="144dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:scaleType="centerInside"
             android:src="@color/blue_500" />
+
         <TextView
             android:id="@+id/idItemBookSearchTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/idItemBookSearchCover"
+            android:layout_marginTop="8dp"
             android:text="Название книги"
             android:textColor="@color/black" />
         <TextView
