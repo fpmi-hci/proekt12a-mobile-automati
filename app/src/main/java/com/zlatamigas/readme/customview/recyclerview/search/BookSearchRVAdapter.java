@@ -6,9 +6,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+import com.zlatamigas.readme.R;
 import com.zlatamigas.readme.customview.ItemBookSearchView;
 import com.zlatamigas.readme.customview.recyclerview.cart.BookCartRVOptionsListener;
 import com.zlatamigas.readme.customview.recyclerview.entity.BookCommonInfoRVModel;
+import com.zlatamigas.readme.util.StringMerger;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -46,24 +49,24 @@ public class BookSearchRVAdapter extends RecyclerView.Adapter<BookSearchRVAdapte
 
         ItemBookSearchView view = holder.itemView;
 
-        // cover
+        if(model.getImgUrl() != null && !model.getImgUrl().isEmpty()){
+            Picasso.get()
+                    .load(model.getImgUrl())
+                    .error(R.color.blue_500)
+                    .into(view.getIvCover());
+        } else {
+            view.getIvCover().setImageResource(R.color.blue_500);
+        }
 
         view.getTvTitle().setText(model.getTitle());
 
-        StringBuilder sbAuthors = new StringBuilder("");
-        Iterator<String> authorsIterator = model.getAuthors().iterator();
-        if(authorsIterator.hasNext()){
-            sbAuthors.append(authorsIterator.next());
-
-            while (authorsIterator.hasNext()){
-                sbAuthors.append(", ").append(authorsIterator.next());
-            }
-        }
-        view.getTvAuthors().setText(sbAuthors.toString());
-
+        view.getTvAuthors().setText(StringMerger.mergeStrings(model.getAuthors()));
 
         view.getTvCost().setText(model.getCost().toString());
 
+        view.getIvCover().setOnClickListener(v -> {
+            listener.onBookClicked(model, view);
+        });
     }
 
     @Override

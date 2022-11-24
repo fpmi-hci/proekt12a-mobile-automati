@@ -15,6 +15,7 @@ public class APIProvider {
                 .baseUrl("https://automati-develop.herokuapp.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
+
         service = retrofit.create(APIService.class);
     }
 

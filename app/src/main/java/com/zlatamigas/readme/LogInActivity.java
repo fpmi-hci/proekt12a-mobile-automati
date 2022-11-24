@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import com.zlatamigas.readme.controller.APIProvider;
+import com.zlatamigas.readme.controller.UserController;
 import com.zlatamigas.readme.controller.apimodel.request.LoginRequestAPIModel;
 import com.zlatamigas.readme.controller.apimodel.response.LoginResponseAPIModel;
 import com.zlatamigas.readme.databinding.ActivityLogInBinding;
@@ -53,6 +54,9 @@ public class LogInActivity extends AppCompatActivity {
                 public void onResponse(Call<LoginResponseAPIModel> call, Response<LoginResponseAPIModel> response) {
 
                     if(response.body() != null) {
+
+                        UserController.getInstance().setToken(response.body().getToken());
+
                         Intent toMainIntent = new Intent(context, MainActivity.class);
                         startActivity(toMainIntent);
                     } else {

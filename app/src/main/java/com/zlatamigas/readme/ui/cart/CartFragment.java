@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,15 +21,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.zlatamigas.readme.R;
 import com.zlatamigas.readme.controller.APIController;
+import com.zlatamigas.readme.controller.APIProvider;
 import com.zlatamigas.readme.controller.OrderController;
+import com.zlatamigas.readme.controller.UserController;
+import com.zlatamigas.readme.controller.apimodel.response.AuthorResponseAPIModel;
+import com.zlatamigas.readme.controller.apimodel.response.BookFullInfoResponseAPIModel;
+import com.zlatamigas.readme.controller.apimodel.response.CartResponseAPIModel;
 import com.zlatamigas.readme.customview.ItemBookCartView;
 import com.zlatamigas.readme.customview.recyclerview.cart.BookCartRVAdapter;
 import com.zlatamigas.readme.customview.recyclerview.cart.BookCartRVOptionsListener;
 import com.zlatamigas.readme.customview.recyclerview.entity.BookCommonInfoRVModel;
 import com.zlatamigas.readme.databinding.FragmentCartBinding;
+import com.zlatamigas.readme.util.StringMerger;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CartFragment extends Fragment implements BookCartRVOptionsListener {
 
@@ -58,9 +70,47 @@ public class CartFragment extends Fragment implements BookCartRVOptionsListener 
 
         rvCartBooks = binding.idFrCartRVBooks;
 
-        ArrayList<BookCommonInfoRVModel> rvModelBookCommonInfoRVModelList = apiController.getUserCartBooks(1);
-        rvAdapter = new BookCartRVAdapter(requireActivity(), rvModelBookCommonInfoRVModelList, this);
-        rvCartBooks.setAdapter(rvAdapter);
+        CartFragment currFragment = this;
+        ArrayList<BookCommonInfoRVModel> rvModelBookCommonInfoRVModelList = new ArrayList<>();
+
+        Call<CartResponseAPIModel> call = APIProvider.getInstance().getService().getUserCart(UserController.getInstance().getToken());
+        call.enqueue(new Callback<CartResponseAPIModel>() {
+            @Override
+            public void onResponse(Call<CartResponseAPIModel> call, Response<CartResponseAPIModel> response) {
+
+                CartResponseAPIModel body = response.body();
+                if(body != null) {
+
+                    rvModelBookCommonInfoRVModelList.clear();
+
+                    for(BookFullInfoResponseAPIModel book: body.getBooks()){
+                        ArrayList<String> authors = new ArrayList<>(book.getAuthors().size());
+                        for(AuthorResponseAPIModel author: book.getAuthors()){
+                            authors.add(author.getFullName());
+                        }
+                        rvModelBookCommonInfoRVModelList.add(new BookCommonInfoRVModel(
+                                book.getId(),
+                                book.getTitle(),
+                                authors,
+                                book.getCost(),
+                                book.getImageUrl()
+                        ));
+                    }
+                    rvAdapter = new BookCartRVAdapter(requireActivity(), rvModelBookCommonInfoRVModelList, currFragment);
+                    rvCartBooks.setAdapter(rvAdapter);
+
+                    System.out.println("success");
+                } else {
+                    System.out.println("empty? error?");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CartResponseAPIModel> call, Throwable t) {
+                System.out.println("failure");
+            }
+        });
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext());
         rvCartBooks.setLayoutManager(layoutManager);
@@ -70,8 +120,6 @@ public class CartFragment extends Fragment implements BookCartRVOptionsListener 
         DividerItemDecoration itemDecorator = new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.divider_blue_100_2h));
         rvCartBooks.addItemDecoration(itemDecorator);
-
-
 
         Button btnSearch = binding.idFrCartBtnToOrder;
         btnSearch.setOnClickListener(v -> {
@@ -110,8 +158,10 @@ public class CartFragment extends Fragment implements BookCartRVOptionsListener 
 
     @Override
     public void onBookClicked(BookCommonInfoRVModel book, ItemBookCartView v) {
-//        NavController navController = NavHostFragment.findNavController(this);
-//        navController.navigate(R.id.navigation_order);
+        NavController navController = NavHostFragment.findNavController(this);
+        Bundle args = new Bundle();
+        args.putLong("book_id", book.getId());
+        navController.navigate(R.id.navigation_book, args);
     }
 
     @Override
@@ -146,6 +196,7 @@ public class CartFragment extends Fragment implements BookCartRVOptionsListener 
     public void onResume() {
         super.onResume();
         orderController.clear();
+        cbSelectAll.setChecked(false);
         setSelectedBooksSumInfo();
     }
 }
