@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.zlatamigas.readme.R;
 import com.zlatamigas.readme.controller.APIController;
+import com.zlatamigas.readme.controller.apimodel.request.SearchParamsRequestAPIModel;
 import com.zlatamigas.readme.customview.recyclerview.entity.SearchCheckboxRVModel;
 import com.zlatamigas.readme.customview.recyclerview.search.SearchCheckboxRVAdapter;
 import com.zlatamigas.readme.databinding.FragmentSearchBinding;
@@ -31,8 +32,6 @@ public class SearchFragment extends Fragment {
 
     private RecyclerView rvGenres;
     private SearchCheckboxRVAdapter rvGenresAdapter;
-    private RecyclerView rvSearchTypes;
-    private SearchCheckboxRVAdapter rvSearchTypesAdapter;
 
     private SearchViewModel searchViewModel;
     private FragmentSearchBinding binding;
@@ -53,12 +52,7 @@ public class SearchFragment extends Fragment {
         rvGenres.setLayoutManager(glmGenres);
         rvGenres.setNestedScrollingEnabled(false);
 
-        rvSearchTypes = binding.idFrSearchRVSearchTypes;
-        rvSearchTypesAdapter = new SearchCheckboxRVAdapter(requireActivity(), apiController.getSearchTypes());
-        rvSearchTypes.setAdapter(rvSearchTypesAdapter);
-        GridLayoutManager glmSearchTypes = new GridLayoutManager(requireContext(), 2);
-        rvSearchTypes.setLayoutManager(glmSearchTypes);
-
+        binding.idFrSearchSPSortTypes.setSelection(0);
 
         Button btnSearch = binding.idFrSearchBtnSearch;
         btnSearch.setOnClickListener(v -> {
@@ -69,7 +63,28 @@ public class SearchFragment extends Fragment {
 //                    .commit();
 
             NavController navController = NavHostFragment.findNavController(this);
-            navController.navigate(R.id.navigation_searchresult);
+
+            Bundle args = new Bundle();
+            SearchParamsRequestAPIModel searchParams = new SearchParamsRequestAPIModel();
+
+            searchParams.setSearchString(binding.idFrSearchTVSearchStr.getText().toString().trim());
+
+            boolean titleSearch = binding.idFrSearchCBTitle.isChecked();
+            boolean authorSearch = binding.idFrSearchCBAuthor.isChecked();
+            SearchParamsRequestAPIModel.SearchType searchType = SearchParamsRequestAPIModel.SearchType.TITLE_OR_AUTHOR;
+            if(titleSearch && !authorSearch){
+                searchType =  SearchParamsRequestAPIModel.SearchType.TITLE;
+            }else if(!titleSearch && authorSearch){
+                searchType =  SearchParamsRequestAPIModel.SearchType.AUTHOR;
+            }
+            searchParams.setSearchType(searchType);
+
+            searchParams.setSortDirection(SearchParamsRequestAPIModel.SortDirection.getById(
+                    binding.idFrSearchSPSortTypes.getSelectedItemPosition())
+            );
+
+            args.putSerializable("search_params", searchParams);
+            navController.navigate(R.id.navigation_searchresult, args);
         });
 
         return root;

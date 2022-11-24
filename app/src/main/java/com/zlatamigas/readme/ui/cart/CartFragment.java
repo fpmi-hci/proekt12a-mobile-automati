@@ -177,10 +177,30 @@ public class CartFragment extends Fragment implements BookCartRVOptionsListener 
 
     @Override
     public void onDeleteBookClicked(BookCommonInfoRVModel book, int position) {
-        rvAdapter.deleteViewWithModelAt(position);
-        orderController.remove(book);
-        apiController.removeBookFromCart(book.getId(), 1);
-        setSelectedBooksSumInfo();
+
+        Call<CartResponseAPIModel> call = APIProvider.getInstance().getService().removeFromCart(book.getId(), UserController.getInstance().getToken());
+        call.enqueue(new Callback<CartResponseAPIModel>() {
+            @Override
+            public void onResponse(Call<CartResponseAPIModel> call, Response<CartResponseAPIModel> response) {
+
+                CartResponseAPIModel body = response.body();
+                if(body != null) {
+
+                    rvAdapter.deleteViewWithModelAt(position);
+                    orderController.remove(book);
+                    setSelectedBooksSumInfo();
+
+                    System.out.println("success");
+                } else {
+                    System.out.println("empty? error?");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CartResponseAPIModel> call, Throwable t) {
+                System.out.println("failure");
+            }
+        });
     }
 
     private void setSelectedBooksSumInfo(){

@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">ReadMe</string>
     <string name="title_home">ReadMe</string>
-    <string name="title_search">Search</string>
-    <string name="title_cart">Cart</string>
-    <string name="title_order">Order</string>
-    <string name="title_mybooks">My books</string>
-    <string name="title_profile">Profile</string>
-    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_search">Поиск</string>
+    <string name="title_searchresult">Результаты поиска</string>
+    <string name="title_cart">Корзина</string>
+    <string name="title_order">Заказ</string>
+    <string name="title_mybooks">Мои книги</string>
+    <string name="title_profile">Профиль</string>
 </resources>

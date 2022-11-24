@@ -31,6 +31,7 @@ import com.zlatamigas.readme.controller.OrderController;
 import com.zlatamigas.readme.controller.UserController;
 import com.zlatamigas.readme.controller.apimodel.response.AuthorResponseAPIModel;
 import com.zlatamigas.readme.controller.apimodel.response.BookFullInfoResponseAPIModel;
+import com.zlatamigas.readme.controller.apimodel.response.CartResponseAPIModel;
 import com.zlatamigas.readme.controller.apimodel.response.LoginResponseAPIModel;
 import com.zlatamigas.readme.customview.ItemBookCartView;
 import com.zlatamigas.readme.customview.recyclerview.cart.BookCartRVAdapter;
@@ -60,10 +61,12 @@ public class BookFragment extends Fragment {
         binding = FragmentBookBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        Call<BookFullInfoResponseAPIModel> call = APIProvider.getInstance().getService().getBookFullInfo(
-                getArguments().getLong("book_id"),
+        long bookId = getArguments().getLong("book_id");
+
+        Call<BookFullInfoResponseAPIModel> callFill = APIProvider.getInstance().getService().getBookFullInfo(
+                bookId,
                 UserController.getInstance().getToken());
-        call.enqueue(new Callback<BookFullInfoResponseAPIModel>() {
+        callFill.enqueue(new Callback<BookFullInfoResponseAPIModel>() {
             @Override
             public void onResponse(Call<BookFullInfoResponseAPIModel> call, Response<BookFullInfoResponseAPIModel> response) {
 
@@ -80,6 +83,7 @@ public class BookFragment extends Fragment {
                         binding.idFrBookTVBought.setVisibility(View.VISIBLE);
                         binding.idFrBookTVPrice.setVisibility(View.GONE);
                     } else {
+                        binding.idFrBookBtnAddToCart.setVisibility(View.VISIBLE);
                         binding.idFrBookTVBought.setVisibility(View.GONE);
                         binding.idFrBookTVPrice.setText(body.getCost().toString());
                         binding.idFrBookTVPrice.setVisibility(View.VISIBLE);
@@ -106,6 +110,30 @@ public class BookFragment extends Fragment {
             public void onFailure(Call<BookFullInfoResponseAPIModel> call, Throwable t) {
                 System.out.println("failure");
             }
+        });
+
+
+        binding.idFrBookBtnAddToCart.setOnClickListener(v -> {
+
+            Call<CartResponseAPIModel> callAdd = APIProvider.getInstance().getService().addToCart(bookId, UserController.getInstance().getToken());
+            callAdd.enqueue(new Callback<CartResponseAPIModel>() {
+                @Override
+                public void onResponse(Call<CartResponseAPIModel> call, Response<CartResponseAPIModel> response) {
+
+                    CartResponseAPIModel body = response.body();
+                    if(body != null) {
+
+                        System.out.println("success");
+                    } else {
+                        System.out.println("empty? error?");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CartResponseAPIModel> call, Throwable t) {
+                    System.out.println("failure");
+                }
+            });
         });
 
         return root;

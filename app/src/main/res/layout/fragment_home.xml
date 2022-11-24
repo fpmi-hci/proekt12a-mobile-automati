@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="@dimen/bottom_navbar_offset"
         android:divider="@drawable/divider_empty_h20"
         android:showDividers="middle|beginning">
 

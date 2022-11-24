@@ -15,12 +15,12 @@
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
         android:paddingTop="20dp"
-        android:paddingBottom="@dimen/bottom_navbar_offset"
         android:showDividers="middle">
 
 
 
         <EditText
+            android:id="@+id/idFrSearchTVSearchStr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_white_border_blue_500_rounded"
@@ -39,12 +39,29 @@
             android:text="Искать" />
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/idFrSearchRVSearchTypes"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:background="@drawable/bg_blue_100_rounded"
-            android:padding="10dp" />
+            android:padding="10dp" >
+
+            <CheckBox
+                android:id="@+id/idFrSearchCBTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:buttonTint="@color/blue_500"
+                android:text="по названию"/>
+            <CheckBox
+                android:id="@+id/idFrSearchCBAuthor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:buttonTint="@color/blue_500"
+                android:text="по автору"/>
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -65,6 +82,7 @@
             android:text="Сортировать" />
 
         <Spinner
+            android:id="@+id/idFrSearchSPSortTypes"
             style="@style/SpinnerSearchTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

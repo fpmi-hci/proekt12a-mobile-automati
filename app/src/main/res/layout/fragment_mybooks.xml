@@ -12,7 +12,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idFrMyBooksRVBooks"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/bottom_navbar_offset"/>
+        android:layout_height="wrap_content"/>
 
 </androidx.core.widget.NestedScrollView>

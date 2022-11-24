@@ -40,7 +40,8 @@
         android:name="com.zlatamigas.readme.ui.searchresult.SearchResultFragment"
         android:label=""
         tools:layout="@layout/fragment_searchresult"
-        />
+        >
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_order"
