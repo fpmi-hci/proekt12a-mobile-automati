@@ -31,6 +31,7 @@ import com.zlatamigas.readme.customview.recyclerview.entity.BookCommonInfoRVMode
 import com.zlatamigas.readme.customview.recyclerview.mybooks.BookMyBooksRVAdapter;
 import com.zlatamigas.readme.customview.recyclerview.mybooks.BookMyBooksRVOptionsListener;
 import com.zlatamigas.readme.databinding.FragmentMybooksBinding;
+import com.zlatamigas.readme.util.StringMerger;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,6 +39,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -162,10 +164,14 @@ public class MyBooksFragment extends Fragment implements BookMyBooksRVOptionsLis
 
                     try {
                         int i = 1;
+
                         String[] filenameParts = body.getFileName().split("\\.");
+
                         String extension = "." + filenameParts[filenameParts.length - 1];
-                        String fileNameTitle = book.getTitle();
-                        String fileName = book.getTitle() + extension;
+
+                        String fileNameTitle = filenameParts[0];
+                        String fileName = filenameParts[0] + extension;
+
                         File file = new File(folder, fileName);
                         while (file.exists()){
                             fileName = fileNameTitle + " (" + i + ")" + extension;
