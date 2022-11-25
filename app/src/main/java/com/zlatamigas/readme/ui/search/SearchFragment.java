@@ -10,25 +10,28 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zlatamigas.readme.R;
-import com.zlatamigas.readme.controller.APIController;
+import com.zlatamigas.readme.controller.APIProvider;
 import com.zlatamigas.readme.controller.apimodel.request.SearchParamsRequestAPIModel;
+import com.zlatamigas.readme.controller.apimodel.response.GenreResponseAPIModel;
 import com.zlatamigas.readme.customview.recyclerview.entity.SearchCheckboxRVModel;
 import com.zlatamigas.readme.customview.recyclerview.search.SearchCheckboxRVAdapter;
 import com.zlatamigas.readme.databinding.FragmentSearchBinding;
-import com.zlatamigas.readme.ui.searchresult.SearchResultFragment;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SearchFragment extends Fragment {
 
-    private APIController apiController;
+
 
     private RecyclerView rvGenres;
     private SearchCheckboxRVAdapter rvGenresAdapter;
@@ -43,24 +46,47 @@ public class SearchFragment extends Fragment {
         binding = FragmentSearchBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        apiController = new APIController();
+
 
         rvGenres = binding.idFrSearchRVGenres;
-        rvGenresAdapter = new SearchCheckboxRVAdapter(requireActivity(), apiController.getGenres());
-        rvGenres.setAdapter(rvGenresAdapter);
+
         GridLayoutManager glmGenres = new GridLayoutManager(requireContext(), 2);
         rvGenres.setLayoutManager(glmGenres);
         rvGenres.setNestedScrollingEnabled(false);
+
+        Call<List<GenreResponseAPIModel>> call = APIProvider.getInstance().getService().getGenres();
+        call.enqueue(new Callback<List<GenreResponseAPIModel>>() {
+            @Override
+            public void onResponse(Call<List<GenreResponseAPIModel>> call, Response<List<GenreResponseAPIModel>> response) {
+
+                List<GenreResponseAPIModel> body = response.body();
+                if(body != null) {
+
+                    ArrayList<SearchCheckboxRVModel> genres = new ArrayList<>(body.size());
+                    for(GenreResponseAPIModel genre : body){
+                        genres.add(new SearchCheckboxRVModel(genre.getId(), genre.getName()));
+                    }
+
+                    rvGenresAdapter = new SearchCheckboxRVAdapter(requireActivity(), genres);
+                    rvGenres.setAdapter(rvGenresAdapter);
+
+                    System.out.println("success");
+                } else {
+                    System.out.println("empty? error?");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<GenreResponseAPIModel>> call, Throwable t) {
+                System.out.println("failure");
+            }
+        });
+
 
         binding.idFrSearchSPSortTypes.setSelection(0);
 
         Button btnSearch = binding.idFrSearchBtnSearch;
         btnSearch.setOnClickListener(v -> {
-//            SearchResultFragment nextFrag= new SearchResultFragment();
-//            requireActivity().getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.nav_host_fragment_activity_main, nextFrag, "Search result")
-//                    .addToBackStack(null)
-//                    .commit();
 
             NavController navController = NavHostFragment.findNavController(this);
 
@@ -84,6 +110,7 @@ public class SearchFragment extends Fragment {
             );
 
             args.putSerializable("search_params", searchParams);
+            args.putBoolean("search_all", false);
             navController.navigate(R.id.navigation_searchresult, args);
         });
 

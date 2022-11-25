@@ -7,26 +7,32 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zlatamigas.readme.R;
-import com.zlatamigas.readme.controller.APIController;
+import com.zlatamigas.readme.controller.APIProvider;
 import com.zlatamigas.readme.controller.OrderController;
+import com.zlatamigas.readme.controller.UserController;
+import com.zlatamigas.readme.controller.apimodel.request.OrderRequestAPIModel;
+import com.zlatamigas.readme.controller.apimodel.response.UserOrderResponseAPIModel;
 import com.zlatamigas.readme.customview.recyclerview.order.BookOrderRVAdapter;
 import com.zlatamigas.readme.customview.recyclerview.entity.BookCommonInfoRVModel;
 import com.zlatamigas.readme.databinding.FragmentOrderBinding;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class OrderFragment extends Fragment {
-
-    private APIController apiController;
 
     private RecyclerView rvOrderBooks;
     private ArrayList<BookCommonInfoRVModel> rvModelBookCommonInfoRVModelList;
@@ -41,8 +47,6 @@ public class OrderFragment extends Fragment {
 
         binding = FragmentOrderBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        apiController = new APIController();
 
         rvOrderBooks = binding.idFrOrderRVBooks;
 
@@ -65,11 +69,46 @@ public class OrderFragment extends Fragment {
         }
         tvSelectedCost.setText(cost.toString() + " rub.");
 
+        OrderFragment currFragment = this;
 
-//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        DividerItemDecoration itemDecorator = new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL);
-//        itemDecorator.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.divider_blue_100_2h));
-//        rvOrderBooks.addItemDecoration(itemDecorator);
+        binding.idFrOrderBtnFinishOrder.setOnClickListener(v -> {
+
+            OrderRequestAPIModel order = new OrderRequestAPIModel();
+            List<Long> bookIds = new ArrayList<>(rvModelBookCommonInfoRVModelList.size());
+            for(BookCommonInfoRVModel book : rvModelBookCommonInfoRVModelList){
+                bookIds.add(book.getId());
+            }
+            order.setBooks(bookIds);
+
+            Call<UserOrderResponseAPIModel> call = APIProvider.getInstance().getService().addUserOrder(
+                    order,
+                    UserController.getInstance().getToken());
+            call.enqueue(new Callback<UserOrderResponseAPIModel>() {
+                @Override
+                public void onResponse(Call<UserOrderResponseAPIModel> call, Response<UserOrderResponseAPIModel> response) {
+
+                    UserOrderResponseAPIModel body = response.body();
+                    if(body != null) {
+
+                        rvModelBookCommonInfoRVModelList.clear();
+
+                        NavController navController = NavHostFragment.findNavController(currFragment);
+                        navController.navigate(R.id.navigation_cart);
+
+                        System.out.println("success");
+                    } else {
+                        System.out.println("empty? error?");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<UserOrderResponseAPIModel> call, Throwable t) {
+                    System.out.println("failure");
+                }
+            });
+
+
+        });
 
         return root;
     }

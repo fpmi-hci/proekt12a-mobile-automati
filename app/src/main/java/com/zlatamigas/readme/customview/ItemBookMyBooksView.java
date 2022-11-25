@@ -18,6 +18,8 @@ public class ItemBookMyBooksView extends RelativeLayout {
     private ImageView ivCover;
     private TextView tvTitle, tvAuthors;
 
+    private ImageView ivDownload;
+
     public ItemBookMyBooksView(@NonNull Context context) {
         super(context);
 
@@ -27,6 +29,7 @@ public class ItemBookMyBooksView extends RelativeLayout {
         tvAuthors = view.findViewById(R.id.idItemBookMyBooksAuthor);
         ivCover = view.findViewById(R.id.idItemBookMyBooksCover);
 
+        ivDownload = view.findViewById(R.id.idItemBookMyBooksBtnDownload);
     }
 
     public ItemBookMyBooksView(@NonNull Context context, @Nullable AttributeSet attrs) {
@@ -50,6 +53,8 @@ public class ItemBookMyBooksView extends RelativeLayout {
             tvAuthors.setText(author);
             ivCover = view.findViewById(R.id.idItemBookMyBooksCover);
             ivCover.setImageResource(cover);
+
+            ivDownload = view.findViewById(R.id.idItemBookMyBooksBtnDownload);
         } finally {
             a.recycle();
         }
@@ -65,5 +70,9 @@ public class ItemBookMyBooksView extends RelativeLayout {
 
     public TextView getTvAuthors() {
         return tvAuthors;
+    }
+
+    public ImageView getIvDownload() {
+        return ivDownload;
     }
 }

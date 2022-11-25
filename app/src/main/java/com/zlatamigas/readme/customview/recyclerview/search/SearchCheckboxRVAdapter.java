@@ -12,6 +12,8 @@ import com.zlatamigas.readme.R;
 import com.zlatamigas.readme.customview.recyclerview.entity.SearchCheckboxRVModel;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class SearchCheckboxRVAdapter extends RecyclerView.Adapter<SearchCheckboxRVAdapter.SearchCheckboxViewHolder> {
 
@@ -56,6 +58,19 @@ public class SearchCheckboxRVAdapter extends RecyclerView.Adapter<SearchCheckbox
 
     public ArrayList<SearchCheckboxRVModel> getCheckboxList() {
         return checkboxList;
+    }
+
+    private List<Long> getSelectedGenreIds(){
+
+        List<Long> selectedGenres = new LinkedList<>();
+
+        for(SearchCheckboxRVModel cb :checkboxList){
+            if(cb.isSelected()){
+                selectedGenres.add(cb.getId());
+            }
+        }
+
+        return selectedGenres;
     }
 
     public static class SearchCheckboxViewHolder extends RecyclerView.ViewHolder{

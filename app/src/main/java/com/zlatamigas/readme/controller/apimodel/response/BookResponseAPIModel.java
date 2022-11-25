@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class BookFullInfoResponseAPIModel {
+public class BookResponseAPIModel {
 
     @SerializedName("authors")
     @Expose

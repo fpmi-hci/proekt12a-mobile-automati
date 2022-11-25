@@ -13,7 +13,7 @@ public class CartResponseAPIModel {
 
     @SerializedName("books")
     @Expose
-    private List<BookFullInfoResponseAPIModel> books = null;
+    private List<BookResponseAPIModel> books = null;
 
     public long getId() {
         return id;
@@ -23,11 +23,11 @@ public class CartResponseAPIModel {
         this.id = id;
     }
 
-    public List<BookFullInfoResponseAPIModel> getBooks() {
+    public List<BookResponseAPIModel> getBooks() {
         return books;
     }
 
-    public void setBooks(List<BookFullInfoResponseAPIModel> books) {
+    public void setBooks(List<BookResponseAPIModel> books) {
         this.books = books;
     }
 }

@@ -13,30 +13,26 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zlatamigas.readme.R;
-import com.zlatamigas.readme.controller.APIController;
 import com.zlatamigas.readme.controller.APIProvider;
 import com.zlatamigas.readme.controller.OrderController;
 import com.zlatamigas.readme.controller.UserController;
 import com.zlatamigas.readme.controller.apimodel.response.AuthorResponseAPIModel;
-import com.zlatamigas.readme.controller.apimodel.response.BookFullInfoResponseAPIModel;
+import com.zlatamigas.readme.controller.apimodel.response.BookResponseAPIModel;
 import com.zlatamigas.readme.controller.apimodel.response.CartResponseAPIModel;
 import com.zlatamigas.readme.customview.ItemBookCartView;
 import com.zlatamigas.readme.customview.recyclerview.cart.BookCartRVAdapter;
 import com.zlatamigas.readme.customview.recyclerview.cart.BookCartRVOptionsListener;
 import com.zlatamigas.readme.customview.recyclerview.entity.BookCommonInfoRVModel;
 import com.zlatamigas.readme.databinding.FragmentCartBinding;
-import com.zlatamigas.readme.util.StringMerger;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,7 +40,7 @@ import retrofit2.Response;
 
 public class CartFragment extends Fragment implements BookCartRVOptionsListener {
 
-    private APIController apiController;
+
 
     private RecyclerView rvCartBooks;
     private BookCartRVAdapter rvAdapter;
@@ -66,7 +62,7 @@ public class CartFragment extends Fragment implements BookCartRVOptionsListener 
         View root = binding.getRoot();
 
         orderController = OrderController.getInstance();
-        apiController = new APIController();
+
 
         rvCartBooks = binding.idFrCartRVBooks;
 
@@ -83,7 +79,7 @@ public class CartFragment extends Fragment implements BookCartRVOptionsListener 
 
                     rvModelBookCommonInfoRVModelList.clear();
 
-                    for(BookFullInfoResponseAPIModel book: body.getBooks()){
+                    for(BookResponseAPIModel book: body.getBooks()){
                         ArrayList<String> authors = new ArrayList<>(book.getAuthors().size());
                         for(AuthorResponseAPIModel author: book.getAuthors()){
                             authors.add(author.getFullName());

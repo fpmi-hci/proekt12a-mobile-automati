@@ -77,6 +77,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/idFrOrderBtnFinishOrder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/green_200"

@@ -13,7 +13,6 @@ import com.zlatamigas.readme.customview.recyclerview.entity.BookCommonInfoRVMode
 import com.zlatamigas.readme.util.StringMerger;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class BookMyBooksRVAdapter extends RecyclerView.Adapter<BookMyBooksRVAdapter.BookMyBooksViewHolder> {
 
@@ -48,13 +47,13 @@ public class BookMyBooksRVAdapter extends RecyclerView.Adapter<BookMyBooksRVAdap
 
         ItemBookMyBooksView view = holder.itemView;
 
-if(model.getImgUrl() != null && !model.getImgUrl().isEmpty()){
+        if (model.getImgUrl() != null && !model.getImgUrl().isEmpty()) {
             Picasso.get()
                     .load(model.getImgUrl())
-                    .error(R.color.blue_500)
+                    .error(R.mipmap.ic_launcher)
                     .into(view.getIvCover());
         } else {
-            view.getIvCover().setImageResource(R.color.blue_500);
+            view.getIvCover().setImageResource(R.mipmap.ic_launcher);
         }
 
         view.getTvTitle().setText(model.getTitle());
@@ -63,6 +62,9 @@ if(model.getImgUrl() != null && !model.getImgUrl().isEmpty()){
         view.getIvCover().setOnClickListener(v -> {
             listener.onBookClicked(model, view);
         });
+        view.getIvDownload().setOnClickListener(v ->{
+            listener.onDownloadClicked(model, view);
+        });
     }
 
     @Override
@@ -70,7 +72,7 @@ if(model.getImgUrl() != null && !model.getImgUrl().isEmpty()){
         return booksList.size();
     }
 
-    public static class BookMyBooksViewHolder extends RecyclerView.ViewHolder{
+    public static class BookMyBooksViewHolder extends RecyclerView.ViewHolder {
 
         ItemBookMyBooksView itemView;
 

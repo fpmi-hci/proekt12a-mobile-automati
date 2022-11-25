@@ -52,10 +52,10 @@ public class BookSearchRVAdapter extends RecyclerView.Adapter<BookSearchRVAdapte
         if(model.getImgUrl() != null && !model.getImgUrl().isEmpty()){
             Picasso.get()
                     .load(model.getImgUrl())
-                    .error(R.color.blue_500)
+                    .error(R.mipmap.ic_launcher)
                     .into(view.getIvCover());
         } else {
-            view.getIvCover().setImageResource(R.color.blue_500);
+            view.getIvCover().setImageResource(R.mipmap.ic_launcher);
         }
 
         view.getTvTitle().setText(model.getTitle());

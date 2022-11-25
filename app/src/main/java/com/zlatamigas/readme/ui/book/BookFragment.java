@@ -1,49 +1,26 @@
 package com.zlatamigas.readme.ui.book;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
-import com.zlatamigas.readme.MainActivity;
 import com.zlatamigas.readme.R;
-import com.zlatamigas.readme.controller.APIController;
 import com.zlatamigas.readme.controller.APIProvider;
-import com.zlatamigas.readme.controller.OrderController;
 import com.zlatamigas.readme.controller.UserController;
 import com.zlatamigas.readme.controller.apimodel.response.AuthorResponseAPIModel;
-import com.zlatamigas.readme.controller.apimodel.response.BookFullInfoResponseAPIModel;
+import com.zlatamigas.readme.controller.apimodel.response.BookResponseAPIModel;
 import com.zlatamigas.readme.controller.apimodel.response.CartResponseAPIModel;
-import com.zlatamigas.readme.controller.apimodel.response.LoginResponseAPIModel;
-import com.zlatamigas.readme.customview.ItemBookCartView;
-import com.zlatamigas.readme.customview.recyclerview.cart.BookCartRVAdapter;
-import com.zlatamigas.readme.customview.recyclerview.cart.BookCartRVOptionsListener;
-import com.zlatamigas.readme.customview.recyclerview.entity.BookCommonInfoRVModel;
 import com.zlatamigas.readme.databinding.FragmentBookBinding;
-import com.zlatamigas.readme.databinding.FragmentCartBinding;
 import com.zlatamigas.readme.util.StringMerger;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,14 +40,14 @@ public class BookFragment extends Fragment {
 
         long bookId = getArguments().getLong("book_id");
 
-        Call<BookFullInfoResponseAPIModel> callFill = APIProvider.getInstance().getService().getBookFullInfo(
+        Call<BookResponseAPIModel> callFill = APIProvider.getInstance().getService().getBookFullInfo(
                 bookId,
                 UserController.getInstance().getToken());
-        callFill.enqueue(new Callback<BookFullInfoResponseAPIModel>() {
+        callFill.enqueue(new Callback<BookResponseAPIModel>() {
             @Override
-            public void onResponse(Call<BookFullInfoResponseAPIModel> call, Response<BookFullInfoResponseAPIModel> response) {
+            public void onResponse(Call<BookResponseAPIModel> call, Response<BookResponseAPIModel> response) {
 
-                BookFullInfoResponseAPIModel body = response.body();
+                BookResponseAPIModel body = response.body();
                 if(body != null) {
 
 
@@ -91,10 +68,14 @@ public class BookFragment extends Fragment {
                     binding.idFrBookTVTitle.setText(body.getTitle());
                     binding.idFrBookTVDescription.setText(body.getDescription());
 
-                    Picasso.get()
-                            .load(body.getImageUrl())
-                            .error(R.drawable.ic_bnm_mybooks)
-                            .into(binding.idFrBookIVCover);
+                    if (body.getImageUrl() != null && !body.getImageUrl().isEmpty()) {
+                        Picasso.get()
+                                .load(body.getImageUrl())
+                                .error(R.mipmap.ic_launcher)
+                                .into(binding.idFrBookIVCover);
+                    } else {
+                        binding.idFrBookIVCover.setImageResource(R.mipmap.ic_launcher);
+                    }
 
                     binding.idFrBookCLMain.setVisibility(View.VISIBLE);
 
@@ -107,7 +88,7 @@ public class BookFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<BookFullInfoResponseAPIModel> call, Throwable t) {
+            public void onFailure(Call<BookResponseAPIModel> call, Throwable t) {
                 System.out.println("failure");
             }
         });

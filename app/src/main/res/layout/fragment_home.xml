@@ -104,6 +104,7 @@
 
 
         <Button
+            android:id="@+id/idFrHomeBtnNewBooks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="32dp"
@@ -123,6 +124,7 @@
         </androidx.recyclerview.widget.RecyclerView>
 
         <Button
+            android:id="@+id/idFrHomeBtnAllBooks"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="32dp"

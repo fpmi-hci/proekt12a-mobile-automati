@@ -13,7 +13,7 @@ public class SearchParamsRequestAPIModel implements Serializable {
 
     @SerializedName("pageSize")
     @Expose
-    private int pageSize = 1000;
+    private int pageSize = Integer.MAX_VALUE;
 
     @SerializedName("searchString")
     @Expose

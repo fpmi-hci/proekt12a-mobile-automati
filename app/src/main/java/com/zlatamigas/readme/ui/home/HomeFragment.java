@@ -16,22 +16,18 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zlatamigas.readme.R;
-import com.zlatamigas.readme.controller.APIController;
 import com.zlatamigas.readme.controller.APIProvider;
-import com.zlatamigas.readme.controller.UserController;
+import com.zlatamigas.readme.controller.apimodel.request.SearchParamsRequestAPIModel;
 import com.zlatamigas.readme.controller.apimodel.response.AuthorResponseAPIModel;
-import com.zlatamigas.readme.controller.apimodel.response.BookFullInfoResponseAPIModel;
-import com.zlatamigas.readme.controller.apimodel.response.CartResponseAPIModel;
-import com.zlatamigas.readme.customview.recyclerview.cart.BookCartRVAdapter;
+import com.zlatamigas.readme.controller.apimodel.response.BookResponseAPIModel;
 import com.zlatamigas.readme.databinding.FragmentHomeBinding;
 import com.zlatamigas.readme.customview.recyclerview.search.BookSearchRVAdapter;
 import com.zlatamigas.readme.customview.recyclerview.entity.BookCommonInfoRVModel;
 import com.zlatamigas.readme.customview.recyclerview.search.BookSearchRVOptionsListener;
-import com.zlatamigas.readme.ui.cart.CartFragment;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +35,7 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment implements BookSearchRVOptionsListener {
 
-    private APIController apiController;
+
 
     private RecyclerView rvRandomBooks;
     private BookSearchRVAdapter rvAdapter;
@@ -54,7 +50,7 @@ public class HomeFragment extends Fragment implements BookSearchRVOptionsListene
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        apiController = new APIController();
+
 
         rvRandomBooks = binding.idFrHomeRVRandomBooks;
 
@@ -73,21 +69,22 @@ public class HomeFragment extends Fragment implements BookSearchRVOptionsListene
         HomeFragment currFragment = this;
         ArrayList<BookCommonInfoRVModel> rvModelBookCommonInfoRVModelList = new ArrayList<>();
 
-        Call<List<BookFullInfoResponseAPIModel>> call = APIProvider.getInstance().getService().getAllBooks();
-        call.enqueue(new Callback<List<BookFullInfoResponseAPIModel>>() {
+        Call<List<BookResponseAPIModel>> call = APIProvider.getInstance().getService().getAllBooks();
+        call.enqueue(new Callback<List<BookResponseAPIModel>>() {
             @Override
-            public void onResponse(Call<List<BookFullInfoResponseAPIModel>> call, Response<List<BookFullInfoResponseAPIModel>> response) {
+            public void onResponse(Call<List<BookResponseAPIModel>> call, Response<List<BookResponseAPIModel>> response) {
 
-                List<BookFullInfoResponseAPIModel> body = response.body();
+                List<BookResponseAPIModel> body = response.body();
                 if(body != null) {
 
                     rvModelBookCommonInfoRVModelList.clear();
 
-                    Iterator<BookFullInfoResponseAPIModel> iterator = body.iterator();
-                    BookFullInfoResponseAPIModel book;
+                    ListIterator<BookResponseAPIModel> iterator
+                            = body.listIterator(body.size());
+                    BookResponseAPIModel book;
                     int i = 10;
-                    while (iterator.hasNext() && i > 0){
-                        book = iterator.next();
+                    while (iterator.hasPrevious() && i > 0){
+                        book = iterator.previous();
                         i--;
 
                         ArrayList<String> authors = new ArrayList<>(book.getAuthors().size());
@@ -112,9 +109,33 @@ public class HomeFragment extends Fragment implements BookSearchRVOptionsListene
             }
 
             @Override
-            public void onFailure(Call<List<BookFullInfoResponseAPIModel>> call, Throwable t) {
+            public void onFailure(Call<List<BookResponseAPIModel>> call, Throwable t) {
                 System.out.println("failure");
             }
+        });
+
+        binding.idFrHomeBtnNewBooks.setOnClickListener(v -> {
+            NavController navController = NavHostFragment.findNavController(this);
+
+            Bundle args = new Bundle();
+            SearchParamsRequestAPIModel searchParams = new SearchParamsRequestAPIModel();
+            searchParams.setSearchString("Главные новинки");
+            searchParams.setSortDirection(SearchParamsRequestAPIModel.SortDirection.DESC);
+            args.putSerializable("search_params", searchParams);
+            args.putBoolean("search_all", true);
+            navController.navigate(R.id.navigation_searchresult, args);
+        });
+
+        binding.idFrHomeBtnAllBooks.setOnClickListener(v -> {
+            NavController navController = NavHostFragment.findNavController(this);
+
+            Bundle args = new Bundle();
+            SearchParamsRequestAPIModel searchParams = new SearchParamsRequestAPIModel();
+            searchParams.setSearchString("Все товары");
+            searchParams.setSortDirection(SearchParamsRequestAPIModel.SortDirection.ASC);
+            args.putSerializable("search_params", searchParams);
+            args.putBoolean("search_all", true);
+            navController.navigate(R.id.navigation_searchresult, args);
         });
 
         return root;
