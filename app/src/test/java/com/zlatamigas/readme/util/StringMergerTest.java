@@ -25,7 +25,7 @@ public class StringMergerTest {
     @Test
     public void testMergeStrings() {
 
-        String expected = "1.2.3.4";
+        String expected = "12.3.4";
 
         List<String> strs = Arrays.asList("1", "2", "3", "4");
         String actual = StringMerger.mergeStrings(strs, ".");
