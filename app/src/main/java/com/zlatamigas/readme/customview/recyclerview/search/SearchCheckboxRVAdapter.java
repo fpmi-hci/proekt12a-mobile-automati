@@ -60,7 +60,7 @@ public class SearchCheckboxRVAdapter extends RecyclerView.Adapter<SearchCheckbox
         return checkboxList;
     }
 
-    private List<Long> getSelectedGenreIds(){
+    public List<Long> getSelectedGenreIds(){
 
         List<Long> selectedGenres = new LinkedList<>();
 

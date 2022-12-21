@@ -12,7 +12,7 @@ public class APIProvider {
     private APIProvider(){
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://automati-develop.herokuapp.com")
+                .baseUrl("http://readmeapplication-env.eba-5kjirdez.us-east-1.elasticbeanstalk.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

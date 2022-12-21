@@ -26,6 +26,8 @@ import com.zlatamigas.readme.customview.recyclerview.entity.BookCommonInfoRVMode
 import com.zlatamigas.readme.customview.recyclerview.search.BookSearchRVOptionsListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -118,11 +120,13 @@ public class HomeFragment extends Fragment implements BookSearchRVOptionsListene
             NavController navController = NavHostFragment.findNavController(this);
 
             Bundle args = new Bundle();
+            args.putBoolean("search_all", true);
+            args.putString("page_title", "Главные новинки");
+
             SearchParamsRequestAPIModel searchParams = new SearchParamsRequestAPIModel();
-            searchParams.setSearchString("Главные новинки");
             searchParams.setSortDirection(SearchParamsRequestAPIModel.SortDirection.DESC);
             args.putSerializable("search_params", searchParams);
-            args.putBoolean("search_all", true);
+
             navController.navigate(R.id.navigation_searchresult, args);
         });
 
@@ -130,13 +134,65 @@ public class HomeFragment extends Fragment implements BookSearchRVOptionsListene
             NavController navController = NavHostFragment.findNavController(this);
 
             Bundle args = new Bundle();
+            args.putBoolean("search_all", true);
+            args.putString("page_title", "Все товары");
+
             SearchParamsRequestAPIModel searchParams = new SearchParamsRequestAPIModel();
-            searchParams.setSearchString("Все товары");
             searchParams.setSortDirection(SearchParamsRequestAPIModel.SortDirection.ASC);
             args.putSerializable("search_params", searchParams);
-            args.putBoolean("search_all", true);
+
             navController.navigate(R.id.navigation_searchresult, args);
         });
+
+        binding.idLLGenreFiction.setOnClickListener(v -> {
+            NavController navController = NavHostFragment.findNavController(this);
+
+            Bundle args = new Bundle();
+            args.putBoolean("search_all", false);
+            args.putString("page_title", "Художественная литература");
+
+            SearchParamsRequestAPIModel searchParams = new SearchParamsRequestAPIModel();
+            searchParams.setSortDirection(SearchParamsRequestAPIModel.SortDirection.DESC);
+
+            searchParams.setGenreIds(Collections.singletonList(8L));
+            args.putSerializable("search_params", searchParams);
+
+            navController.navigate(R.id.navigation_searchresult, args);
+        });
+
+        binding.idLLGenreNonFiction.setOnClickListener(v -> {
+            NavController navController = NavHostFragment.findNavController(this);
+
+            Bundle args = new Bundle();
+            args.putBoolean("search_all", false);
+            args.putString("page_title", "Неудожественная литература");
+
+            SearchParamsRequestAPIModel searchParams = new SearchParamsRequestAPIModel();
+            searchParams.setSortDirection(SearchParamsRequestAPIModel.SortDirection.DESC);
+            searchParams.setGenreIds(Collections.singletonList(1L));
+            args.putSerializable("search_params", searchParams);
+
+            navController.navigate(R.id.navigation_searchresult, args);
+        });
+
+        binding.idLLGenreScienceFiction.setOnClickListener(v -> {
+            NavController navController = NavHostFragment.findNavController(this);
+
+            Bundle args = new Bundle();
+            args.putBoolean("search_all", false);
+            args.putString("page_title", "Фантастика");
+
+            SearchParamsRequestAPIModel searchParams = new SearchParamsRequestAPIModel();
+            searchParams.setSortDirection(SearchParamsRequestAPIModel.SortDirection.DESC);
+            searchParams.setGenreIds(Collections.singletonList(7L));
+            args.putSerializable("search_params", searchParams);
+
+            navController.navigate(R.id.navigation_searchresult, args);
+        });
+
+
+
+
 
         return root;
     }

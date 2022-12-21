@@ -93,7 +93,8 @@ public class SearchFragment extends Fragment {
             Bundle args = new Bundle();
             SearchParamsRequestAPIModel searchParams = new SearchParamsRequestAPIModel();
 
-            searchParams.setSearchString(binding.idFrSearchTVSearchStr.getText().toString().trim());
+            String searchStr = binding.idFrSearchTVSearchStr.getText().toString().trim();
+            args.putString("page_title", searchStr);
 
             boolean titleSearch = binding.idFrSearchCBTitle.isChecked();
             boolean authorSearch = binding.idFrSearchCBAuthor.isChecked();
@@ -109,8 +110,14 @@ public class SearchFragment extends Fragment {
                     binding.idFrSearchSPSortTypes.getSelectedItemPosition())
             );
 
+            List<Long> selectedGenreIds = rvGenresAdapter.getSelectedGenreIds();
+            if(!selectedGenreIds.isEmpty()){
+                searchParams.setGenreIds(selectedGenreIds);
+            }
+
             args.putSerializable("search_params", searchParams);
             args.putBoolean("search_all", false);
+            searchParams.setSearchString(searchStr);
             navController.navigate(R.id.navigation_searchresult, args);
         });
 

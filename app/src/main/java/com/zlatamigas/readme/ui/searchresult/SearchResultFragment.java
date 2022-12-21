@@ -74,10 +74,12 @@ public class SearchResultFragment extends Fragment implements BookSearchRVOption
         boolean searchAll = getArguments().getBoolean("search_all");
         SearchParamsRequestAPIModel searchParams = (SearchParamsRequestAPIModel)getArguments().getSerializable("search_params");
 
-        String title = searchParams.getSearchString();
-        if(!searchAll && title.isEmpty()){
-            title = getString(R.string.title_searchresult);
+        String title = getString(R.string.title_searchresult);
+        String tempTitle = getArguments().getString("page_title");
+        if(!tempTitle.isEmpty()){
+            title = tempTitle;
         }
+
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(title);
 
         if(!searchAll) {

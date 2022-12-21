@@ -44,6 +44,7 @@
         android:background="@drawable/bg_white_border_blue_500_rounded"
         android:hint="Пароль"
         android:singleLine="true"
+        android:inputType="textPassword"
         android:paddingHorizontal="@dimen/input_field_padding_horizontal"
         android:paddingVertical="@dimen/input_field_padding_vertical"
         android:textSize="@dimen/input_field_text_size"

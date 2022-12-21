@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class SearchParamsRequestAPIModel implements Serializable {
 
@@ -26,6 +27,10 @@ public class SearchParamsRequestAPIModel implements Serializable {
     @SerializedName("sortDirection")
     @Expose
     private SortDirection sortDirection = SortDirection.ASC;
+
+    @SerializedName("genres")
+    @Expose
+    private List<Long> genreIds = null;
 
     public enum SearchType {
         TITLE_OR_AUTHOR,
@@ -90,5 +95,13 @@ public class SearchParamsRequestAPIModel implements Serializable {
 
     public void setSortDirection(SortDirection sortDirection) {
         this.sortDirection = sortDirection;
+    }
+
+    public List<Long> getGenreIds() {
+        return genreIds;
+    }
+
+    public void setGenreIds(List<Long> genreIds) {
+        this.genreIds = genreIds;
     }
 }
