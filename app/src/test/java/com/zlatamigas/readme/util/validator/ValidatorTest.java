@@ -7,23 +7,23 @@ import org.junit.Test;
 public class ValidatorTest {
 
     @Test
-    public static void validateCorrectEmail(){
+    public void validateCorrectEmail(){
         assertTrue(Validator.validateEmail("user@mail.ru"));
     }
 
     @Test
-    public static void validateIncorrectEmail(){
+    public void validateIncorrectEmail(){
         assertFalse(Validator.validateEmail("user@ru"));
 
     }
 
     @Test
-    public static void validateCorrectPassword(){
+    public void validateCorrectPassword(){
         assertTrue(Validator.validatePassword("12345"));
     }
 
     @Test
-    public static void validateIncorrectPassword(){
+    public void validateIncorrectPassword(){
         assertFalse(Validator.validatePassword("123456"));
     }
 }
