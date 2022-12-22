@@ -19,11 +19,11 @@ public class ValidatorTest {
 
     @Test
     public void validateCorrectPassword(){
-        assertTrue(Validator.validatePassword("12345"));
+        assertTrue(Validator.validatePassword("123456"));
     }
 
     @Test
     public void validateIncorrectPassword(){
-        assertFalse(Validator.validatePassword("123456"));
+        assertFalse(Validator.validatePassword("12345"));
     }
 }
