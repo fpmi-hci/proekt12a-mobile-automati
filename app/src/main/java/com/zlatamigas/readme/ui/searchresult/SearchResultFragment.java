@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.zlatamigas.readme.MainActivity;
 import com.zlatamigas.readme.R;
 import com.zlatamigas.readme.controller.APIProvider;
 import com.zlatamigas.readme.controller.apimodel.request.SearchParamsRequestAPIModel;
@@ -116,6 +117,8 @@ public class SearchResultFragment extends Fragment implements BookSearchRVOption
                     } else {
                         System.out.println("empty? error?");
                     }
+
+
                 }
 
                 @Override
@@ -161,6 +164,8 @@ public class SearchResultFragment extends Fragment implements BookSearchRVOption
                     } else {
                         System.out.println("empty? error?");
                     }
+
+
                 }
 
                 @Override
@@ -190,15 +195,13 @@ public class SearchResultFragment extends Fragment implements BookSearchRVOption
         binding = null;
     }
 
-    // TODO
     @Override
     public void onBookClicked(BookCommonInfoRVModel book, View v) {
         NavController navController = NavHostFragment.findNavController(this);
         Bundle args = new Bundle();
         args.putLong("book_id", book.getId());
+
         navController.navigate(R.id.navigation_book, args);
     }
-
-    
 
 }

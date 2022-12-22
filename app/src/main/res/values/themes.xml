@@ -19,10 +19,12 @@
 
     <style name="SpinnerSearchTheme" parent="android:Widget.Spinner">
         <item name="android:background">@drawable/bg_spinner_search</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="SpinnerPaymentTypeTheme" parent="android:Widget.Spinner">
         <item name="android:background">@drawable/bg_spinner_paymenttype</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="CheckBoxTheme" parent="">
@@ -38,6 +40,16 @@
 
     <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
         <item name="cornerSize">50%</item>
+    </style>
+
+
+
+    <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">11sp</item>
     </style>
 
 </resources>

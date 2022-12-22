@@ -55,14 +55,14 @@
 
             </LinearLayout>
 
-            <Spinner
+            <TextView
+                android:id="@+id/idFrOrderTVPaymentType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/payment_type"
+                android:textColor="@color/black"
+                android:text="Тип оплаты"
                 android:padding="16dp"
-                android:spinnerMode="dropdown"
-                android:textAlignment="center"
-                style="@style/SpinnerPaymentTypeTheme"/>
+                android:textAlignment="center"/>
 
             <TextView
                 android:id="@+id/idFrOrderTVSelectedCost"

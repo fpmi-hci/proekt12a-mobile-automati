@@ -14,6 +14,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.zlatamigas.readme.MainActivity;
 import com.zlatamigas.readme.R;
 import com.zlatamigas.readme.controller.APIProvider;
 import com.zlatamigas.readme.controller.apimodel.request.SearchParamsRequestAPIModel;
@@ -74,6 +75,7 @@ public class SearchFragment extends Fragment {
                 } else {
                     System.out.println("empty? error?");
                 }
+
             }
 
             @Override
@@ -118,6 +120,10 @@ public class SearchFragment extends Fragment {
             args.putSerializable("search_params", searchParams);
             args.putBoolean("search_all", false);
             searchParams.setSearchString(searchStr);
+
+
+
+
             navController.navigate(R.id.navigation_searchresult, args);
         });
 

@@ -33,7 +33,7 @@
             android:layout_alignTop="@+id/idFrProfileIcon"
             android:layout_marginStart="24dp"
             android:layout_toEndOf="@+id/idFrProfileIcon"
-            android:text="Name"
+            android:text="Пользователь"
             android:textColor="@color/blue_500"
             android:textSize="20sp" />
 
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/idFrProfileName"
             android:layout_alignStart="@+id/idFrProfileName"
-            android:text="Email"
+            android:text="Почта"
             android:textSize="16sp"
             android:textColor="@color/blue_500"/>
 

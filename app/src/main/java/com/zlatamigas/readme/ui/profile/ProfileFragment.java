@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.squareup.picasso.Picasso;
+import com.zlatamigas.readme.MainActivity;
 import com.zlatamigas.readme.R;
 import com.zlatamigas.readme.controller.APIProvider;
 import com.zlatamigas.readme.controller.UserController;
@@ -53,6 +54,8 @@ public class ProfileFragment extends Fragment {
                         binding.idFrProfileIcon.setImageResource(R.mipmap.ic_launcher);
                     }
 
+
+
                     System.out.println("success");
                 } else {
                     System.out.println("empty? error?");
@@ -73,4 +76,5 @@ public class ProfileFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }

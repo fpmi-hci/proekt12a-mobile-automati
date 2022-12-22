@@ -25,11 +25,13 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_white_border_blue_500_rounded"
             android:hint="Поиск"
+            android:textColorHint="@color/gray_200"
             android:singleLine="true"
             android:drawableStart="@drawable/ic_bnm_search"
             android:drawableTint="@color/blue_500"
             android:paddingHorizontal="@dimen/input_field_padding_horizontal"
             android:paddingVertical="@dimen/input_field_padding_vertical"
+            android:textColor="@color/black"
             android:textSize="@dimen/input_field_text_size"
             android:textAlignment="viewEnd"/>
 
@@ -52,6 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:buttonTint="@color/blue_500"
+                android:textColor="@color/black"
                 android:text="по названию"/>
             <CheckBox
                 android:id="@+id/idFrSearchCBAuthor"
@@ -59,6 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:buttonTint="@color/blue_500"
+                android:textColor="@color/black"
                 android:text="по автору"/>
 
         </LinearLayout>
@@ -89,7 +93,7 @@
             android:entries="@array/sorting_type"
             android:padding="10dp"
             android:spinnerMode="dropdown"
-            android:textAlignment="viewEnd" />
+            android:textAlignment="viewEnd"/>
 
         <Button
             android:id="@+id/idFrSearchBtnSearch"

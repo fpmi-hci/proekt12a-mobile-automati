@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -14,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.zlatamigas.readme.MainActivity;
 import com.zlatamigas.readme.R;
 import com.zlatamigas.readme.controller.APIProvider;
 import com.zlatamigas.readme.controller.OrderController;
@@ -45,11 +47,14 @@ public class OrderFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         orderViewModel = new ViewModelProvider(this).get(OrderViewModel.class);
 
+
         binding = FragmentOrderBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         rvOrderBooks = binding.idFrOrderRVBooks;
 
+        String paymentType = getArguments().getString("payment_type");
+        binding.idFrOrderTVPaymentType.setText(paymentType);
 
         rvModelBookCommonInfoRVModelList = OrderController.getInstance().getSelectedBooks();
         rvAdapter = new BookOrderRVAdapter(requireActivity(), rvModelBookCommonInfoRVModelList);
@@ -67,7 +72,7 @@ public class OrderFragment extends Fragment {
         for(BookCommonInfoRVModel book : rvModelBookCommonInfoRVModelList){
             cost = cost.add(book.getCost());
         }
-        tvSelectedCost.setText(cost.toString() + " rub.");
+        tvSelectedCost.setText(cost.toString() + " руб.");
 
         OrderFragment currFragment = this;
 
@@ -95,14 +100,45 @@ public class OrderFragment extends Fragment {
                         NavController navController = NavHostFragment.findNavController(currFragment);
                         navController.navigate(R.id.navigation_cart);
 
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+                        builder.setTitle("Оплата подтверждена!")
+                                .setPositiveButton("ОК", (dialog, id) -> {
+                                    dialog.cancel();
+                                });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+
                         System.out.println("success");
                     } else {
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+                        builder.setTitle("Ошибка во время оплаты!")
+                                .setMessage("Оплата отменена, попытайтесь повторно оформить заказ позже.")
+                                .setPositiveButton("ОК", (dialog, id) -> {
+                                    dialog.cancel();
+                                });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+
                         System.out.println("empty? error?");
                     }
+
+
                 }
 
                 @Override
                 public void onFailure(Call<UserOrderResponseAPIModel> call, Throwable t) {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+                    builder.setTitle("Ошибка связи с сервером!")
+                            .setMessage("Проверьте соединение с интернетом!")
+                            .setPositiveButton("ОК", (dialog, id) -> {
+                                dialog.cancel();
+                            });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
                     System.out.println("failure");
                 }
             });
@@ -118,4 +154,5 @@ public class OrderFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }

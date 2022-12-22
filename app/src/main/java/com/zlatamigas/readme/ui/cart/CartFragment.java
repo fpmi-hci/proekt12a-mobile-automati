@@ -40,8 +40,6 @@ import retrofit2.Response;
 
 public class CartFragment extends Fragment implements BookCartRVOptionsListener {
 
-
-
     private RecyclerView rvCartBooks;
     private BookCartRVAdapter rvAdapter;
 
@@ -117,11 +115,15 @@ public class CartFragment extends Fragment implements BookCartRVOptionsListener 
         itemDecorator.setDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.divider_blue_100_2h));
         rvCartBooks.addItemDecoration(itemDecorator);
 
-        Button btnSearch = binding.idFrCartBtnToOrder;
-        btnSearch.setOnClickListener(v -> {
+        Button btnToOrder = binding.idFrCartBtnToOrder;
+        btnToOrder.setOnClickListener(v -> {
+
+            Bundle args = new Bundle();
+            String selectedItem = binding.idFrCartSPPaymentType.getSelectedItem().toString();
+            args.putString("payment_type", selectedItem);
 
             NavController navController = NavHostFragment.findNavController(this);
-            navController.navigate(R.id.navigation_order);
+            navController.navigate(R.id.navigation_order, args);
         });
 
 
@@ -205,7 +207,7 @@ public class CartFragment extends Fragment implements BookCartRVOptionsListener 
         for(BookCommonInfoRVModel book : orderController.getSelectedBooks()){
             cost = cost.add(book.getCost());
         }
-        tvSelectedCost.setText(cost.toString() + " rub.");
+        tvSelectedCost.setText(cost.toString() + " руб.");
     }
 
     @Override

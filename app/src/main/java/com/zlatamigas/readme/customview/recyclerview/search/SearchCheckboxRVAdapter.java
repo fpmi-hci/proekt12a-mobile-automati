@@ -47,6 +47,7 @@ public class SearchCheckboxRVAdapter extends RecyclerView.Adapter<SearchCheckbox
         view.setOnCheckedChangeListener((buttonView, isChecked) -> {
             model.setSelected(isChecked);
         });
+        view.setTextColor(context.getColor(R.color.black));
         view.setText(model.getValue());
         view.setChecked(model.isSelected());
     }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -103,6 +104,8 @@ public class BookFragment extends Fragment {
 
                     CartResponseAPIModel body = response.body();
                     if(body != null) {
+
+                        Toast.makeText(requireContext(), "Книга в корзине", Toast.LENGTH_SHORT);
 
                         System.out.println("success");
                     } else {

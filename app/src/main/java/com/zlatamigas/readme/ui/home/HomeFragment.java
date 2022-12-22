@@ -6,8 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -15,6 +18,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.zlatamigas.readme.MainActivity;
 import com.zlatamigas.readme.R;
 import com.zlatamigas.readme.controller.APIProvider;
 import com.zlatamigas.readme.controller.apimodel.request.SearchParamsRequestAPIModel;
@@ -37,8 +41,6 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment implements BookSearchRVOptionsListener {
 
-
-
     private RecyclerView rvRandomBooks;
     private BookSearchRVAdapter rvAdapter;
 
@@ -51,8 +53,6 @@ public class HomeFragment extends Fragment implements BookSearchRVOptionsListene
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-
 
         rvRandomBooks = binding.idFrHomeRVRandomBooks;
 
@@ -127,6 +127,9 @@ public class HomeFragment extends Fragment implements BookSearchRVOptionsListene
             searchParams.setSortDirection(SearchParamsRequestAPIModel.SortDirection.DESC);
             args.putSerializable("search_params", searchParams);
 
+
+
+
             navController.navigate(R.id.navigation_searchresult, args);
         });
 
@@ -140,6 +143,9 @@ public class HomeFragment extends Fragment implements BookSearchRVOptionsListene
             SearchParamsRequestAPIModel searchParams = new SearchParamsRequestAPIModel();
             searchParams.setSortDirection(SearchParamsRequestAPIModel.SortDirection.ASC);
             args.putSerializable("search_params", searchParams);
+
+
+
 
             navController.navigate(R.id.navigation_searchresult, args);
         });
@@ -157,6 +163,9 @@ public class HomeFragment extends Fragment implements BookSearchRVOptionsListene
             searchParams.setGenreIds(Collections.singletonList(8L));
             args.putSerializable("search_params", searchParams);
 
+
+
+
             navController.navigate(R.id.navigation_searchresult, args);
         });
 
@@ -171,6 +180,9 @@ public class HomeFragment extends Fragment implements BookSearchRVOptionsListene
             searchParams.setSortDirection(SearchParamsRequestAPIModel.SortDirection.DESC);
             searchParams.setGenreIds(Collections.singletonList(1L));
             args.putSerializable("search_params", searchParams);
+
+
+
 
             navController.navigate(R.id.navigation_searchresult, args);
         });
@@ -187,15 +199,15 @@ public class HomeFragment extends Fragment implements BookSearchRVOptionsListene
             searchParams.setGenreIds(Collections.singletonList(7L));
             args.putSerializable("search_params", searchParams);
 
+
+
+
             navController.navigate(R.id.navigation_searchresult, args);
         });
 
-
-
-
-
         return root;
     }
+
 
     @Override
     public void onDestroyView() {
