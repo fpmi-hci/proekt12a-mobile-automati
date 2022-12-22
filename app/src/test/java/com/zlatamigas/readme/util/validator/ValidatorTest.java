@@ -13,7 +13,7 @@ public class ValidatorTest {
 
     @Test
     public static void validateIncorrectEmail(){
-        assertFalse(Validator.validateEmail("user@.ru"));
+        assertFalse(Validator.validateEmail("user@ru"));
 
     }
 
