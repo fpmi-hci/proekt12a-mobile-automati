@@ -18,7 +18,7 @@
 5. ПОльзуйтесь приложением в свое удовольствие!
 
 ## Связанные репозитории
-:house: [Основной репозиторий для веб-приложения](https://github.com/fpmi-hci/proekt12a-automati)  
+:house: [Основной репозиторий проекта](https://github.com/fpmi-hci/proekt12a-automati)  
 
 ## Участники проекта
 **Мигас Злата** - Team Leader, Android-разработчик.  
